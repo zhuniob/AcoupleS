@@ -1,0 +1,578 @@
+.seccion-perfil-usuario .perfil-usuario-body,
+.seccion-perfil-usuario {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+}
+
+.seccion-perfil-usuario .perfil-usuario-header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(#B873FF, transparent);
+    margin-bottom: 1.25rem;
+}
+
+.seccion-perfil-usuario .perfil-usuario-portada {
+    display: block;
+    position: relative;
+    width: 90%;
+    background-image: url('../../../../../assets/img/login/mishi-perro.jpg');
+    background-repeat: no-repeat;
+    height: 17rem;
+    background-position: center;
+    background-size: cover;
+    border-radius: 0 0 20px 20px;
+}
+
+.seccion-perfil-usuario .perfil-usuario-portada .boton-portada {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    border: 0;
+    border-radius: 8px;
+    padding: 12px 25px;
+    background-color: rgba(0, 0, 0, .5);
+    color: #fff;
+    cursor: pointer;
+}
+
+.seccion-perfil-usuario .perfil-usuario-portada .boton-portada i {
+    margin-right: 1rem;
+}
+
+.seccion-perfil-usuario .perfil-usuario-avatar {
+    display: flex;
+    width: 180px;
+    height: 180px;
+    align-items: center;
+    justify-content: center;
+    border: 7px solid #FFFFFF;
+    background-color: #DFE5F2;
+    border-radius: 50%;
+    box-shadow: 0 0 12px rgba(0, 0, 0, .2);
+    position: absolute;
+    bottom: -40px;
+    left: calc(50% - 90px);
+    z-index: 1;
+}
+
+.seccion-perfil-usuario .perfil-usuario-avatar img {
+    width: 100%;
+    position: relative;
+    border-radius: 50%;
+}
+
+.seccion-perfil-usuario .perfil-usuario-avatar .boton-avatar {
+
+    position: absolute;
+    right: -2px;
+    bottom: -2px;
+    border: 0;
+    background-color: #fff;
+    box-shadow: 0 0 12px rgba(0, 0, 0, .2);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.seccion-perfil-usuario .perfil-usuario-body {
+    width: 70%;
+    position: relative;
+    max-width: 950px;
+}
+
+.seccion-perfil-usuario .perfil-usuario-body .nombre {
+    display: block;
+    width: 100%;
+    font-size: 1.75em;
+    margin-bottom: 0.5rem;
+}
+
+.seccion-perfil-usuario .perfil-usuario-body .texto {
+    color: #848484;
+    font-size: 0.95em;
+}
+
+.seccion-perfil-usuario .perfil-usuario-footer,
+.seccion-perfil-usuario .perfil-usuario-bio {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 0 12px rgba(0, 0, 0, .2);
+    background-color: #fff;
+    border-radius: 15px;
+    width: 100%;
+}
+
+.seccion-perfil-usuario .perfil-usuario-bio {
+    margin-bottom: 1.25rem;
+    text-align: center;
+}
+
+.seccion-perfil-usuario .lista-datos {
+    width: 50%;
+    list-style: none;
+}
+
+.seccion-perfil-usuario .lista-datos li {
+    padding: 7px 0;
+}
+
+.seccion-perfil-usuario .lista-datos li>.icono {
+    margin-right: 2rem;
+    align-items: baseline;
+    font-size: 1.5rem;
+    vertical-align: middle;
+
+}
+
+.seccion-perfil-usuario .redes-sociales {
+    position: absolute;
+    right: calc(0px - 50px - 1rem);
+    top: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.seccion-perfil-usuario .redes-sociales .boton-redes {
+    border: 0;
+    background-color: #fff;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: #fff;
+    box-shadow: 0 0 12px rgba(0, 0, 0, .2);
+    font-size: 1.3rem;
+}
+
+.seccion-perfil-usuario .redes-sociales .boton-redes+.boton-redes {
+    margin-top: .5rem;
+}
+
+.seccion-perfil-usuario .boton-redes.facebook {
+    background-color: #5955FF;
+}
+
+.seccion-perfil-usuario .boton-redes.twitter {
+    background-color: #35E1BF;
+}
+
+.seccion-perfil-usuario .boton-redes.instagram {
+    background: linear-gradient(45deg, #FF2DFD, #40A7FF);
+}
+
+/* adactacion a dispositivos */
+@media (max-width: 750px) {
+    .seccion-perfil-usuario .lista-datos {
+        width: 100%;
+    }
+
+    .seccion-perfil-usuario .perfil-usuario-portada,
+    .seccion-perfil-usuario .perfil-usuario-body {
+        width: 95%;
+    }
+
+    .seccion-perfil-usuario .redes-sociales {
+        position: relative;
+        flex-direction: row;
+        width: 100%;
+        left: 0;
+        text-align: center;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        align-items: center;
+        justify-content: center
+    }
+
+    .seccion-perfil-usuario .redes-sociales .boton-redes+.boton-redes {
+        margin-left: 1rem;
+        margin-top: 0;
+    }
+}
+
+.perfil-usuario-footer {
+    position: relative;
+}
+
+.perfil-usuario-footer .btns {
+
+    position: absolute;
+    top: 3%;
+    right: 0;
+    margin-left: 90%;
+    float: right;
+
+    width: 45px;
+    height: 45px;
+    background-color: transparent;
+
+}
+
+
+.btns {
+    font-size: 20px;
+    cursor: pointer;
+
+    color: black;
+    border-radius: 50%;
+
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+}
+
+/* Estilos para los pasos de los botones a las diferentes apartados de lo que se va */
+
+
+.container {
+    display: flex;
+}
+
+.button-container {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    font-size: 1.2em;
+    text-align: center;
+    cursor: pointer;
+}
+
+.line {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: rgb(30, 29, 63);
+    transition: all 0.2s ease-in-out;
+}
+
+button:hover+.line {
+    width: 100%;
+}
+
+
+/* Implementacion de la parte de el floating */
+
+.img-container {
+    position: relative;
+}
+
+.img-container img {
+    border-radius: 4%;
+}
+
+
+.imagen1 {
+    transition: all 0.3s ease-in-out;
+}
+
+.imagen1:hover {
+    transform: scale(1.040);
+}
+
+
+/* Implementación de codigo par qel diseño del titulo */
+
+.modelo-service {
+    font-size: 30px;
+}
+
+/* Implementacion del hover para el nombre de servicio */
+
+.contenidoService h1:hover {
+    color: rgb(29, 33, 43);
+    background-color: #848484;
+}
+
+/* Implementacion de los colores para que se cambien los colores de los compos */
+/* Para el icono redondeaod */
+.p-inputgroup .icon-container {
+    position: relative;
+    border-radius: inherit;
+}
+
+.p-inputgroup .icon {
+    position: absolute;
+    top: 17px;
+    right: 10px;
+    color: red;
+}
+
+.p-inputgroup input {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+
+/* Implementacion para las razas */
+
+.conta {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-flow: wrap;
+}
+
+
+/*  */
+.perfil-usuario-footer .btnspre {
+
+    position: absolute;
+    top: 3%;
+    right: 0;
+    margin-left: 90%;
+    float: right;
+
+    width: 45px;
+    height: 45px;
+    background-color: transparent;
+
+}
+
+
+.btnspre {
+    font-size: 20px;
+    cursor: pointer;
+
+    color: black;
+    border-radius: 50%;
+
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+}
+
+
+/* Nurvo para the preferences */
+
+.col-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+.work-item {
+    margin: 15px;
+    padding: 10px;
+    min-height: 60px;
+    min-width: 100px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, .16), 0 2px 5px 0 rgba(0, 0, 0, .26);
+}
+
+.work-item a:before {
+    top: 15px;
+    z-index: 1;
+    left: -20px;
+    color: #fff;
+    padding: 0 4px;
+    min-width: 88px;
+    font-size: 12px;
+    position: absolute;
+    white-space: nowrap;
+    text-align: center;
+    content: attr(data-type);
+    background-color: #BA68C8;
+    transition: all .4s ease-in-out 0s;
+    transform: rotate(-45deg) rotateX(90deg);
+}
+
+.work-item .more {
+    padding-bottom: 10%;
+    top: 50%;
+    left: 50%;
+    color: #fff;
+    width: 30px;
+    height: 0px;
+    margin-top: -20px;
+    margin-left: -15px;
+    line-height: 30px;
+    position: absolute;
+    border-radius: 50%;
+    text-align: center;
+    background-color: #42ad42;
+    transition: all .4s ease-in-out 0s;
+}
+
+.work-item .title {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 5px;
+    font-size: 13px;
+    position: absolute;
+    text-align: center;
+    transition: all .4s ease-in-out 0s;
+}
+
+.work-item:hover a:before {
+    transform: rotate(-45deg);
+}
+
+.work-item:hover .title {
+    color: #fff;
+    font-size: 10px;
+    text-transform: uppercase;
+    transform: translateY(-20px);
+}
+
+.work-item:hover .more {
+    color: transparent;
+    transform: scale(7);
+}
+
+/*  */
+
+.cs-loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10000;
+}
+
+.cs-loader-inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    color: #444343;
+    padding: 0 100px;
+    text-align: center;
+}
+
+
+.cs-loader-inner label {
+    font-size: 20px;
+    opacity: 0;
+    display: inline-block;
+}
+
+@keyframes lol {
+    0% {
+        opacity: 0;
+        transform: translateX(-300px);
+    }
+
+    33% {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+
+    66% {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(300px);
+    }
+}
+
+@-webkit-keyframes lol {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateX(-300px);
+    }
+
+    33% {
+        opacity: 1;
+        -webkit-transform: translateX(0px);
+    }
+
+    66% {
+        opacity: 1;
+        -webkit-transform: translateX(0px);
+    }
+
+    100% {
+        opacity: 0;
+        -webkit-transform: translateX(300px);
+    }
+}
+
+.cs-loader-inner label:nth-child(6) {
+    -webkit-animation: lol 3s infinite ease-in-out;
+    animation: lol 3s infinite ease-in-out;
+}
+
+.cs-loader-inner label:nth-child(5) {
+    -webkit-animation: lol 3s 100ms infinite ease-in-out;
+    animation: lol 3s 100ms infinite ease-in-out;
+}
+
+.cs-loader-inner label:nth-child(4) {
+    -webkit-animation: lol 3s 200ms infinite ease-in-out;
+    animation: lol 3s 200ms infinite ease-in-out;
+}
+
+.cs-loader-inner label:nth-child(3) {
+    -webkit-animation: lol 3s 300ms infinite ease-in-out;
+    animation: lol 3s 300ms infinite ease-in-out;
+}
+
+.cs-loader-inner label:nth-child(2) {
+    -webkit-animation: lol 3s 400ms infinite ease-in-out;
+    animation: lol 3s 400ms infinite ease-in-out;
+}
+
+.cs-loader-inner label:nth-child(1) {
+    -webkit-animation: lol 3s 500ms infinite ease-in-out;
+    animation: lol 3s 500ms infinite ease-in-out;
+}
+
+/* Implementación del diseño de los animales */
+/* * {
+    font-size: 16px;
+  } */
+  
+  body {
+    position: relative;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+  
+  
+  h2 {
+    font-size: 2em;
+    margin-top: 1em;
+  
+  }
+  
+  th {
+    font-size: 1.1em;
+  }
+  
+  tr {
+    font-weight: 600;
+  }
+  
+  
+  
+  tr:hover {
+    background-color: rgb(245, 245, 245);
+  }
+  
+  #bntRegistrar:hover {
+    background-color: rgb(21, 125, 60);
+  }

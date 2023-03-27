@@ -1,0 +1,127 @@
+<div class="overlay" *ngIf="isLoadingDataAdmin">
+    <div class="cs-loader">
+        <div class="cs-loader-inner">
+            <label>●</label>
+            <label>●</label>
+            <label>●</label>
+            <label>●</label>
+            <label>●</label>
+            <label>●</label>
+        </div>
+    </div>
+
+</div>
+<div *ngIf="!isLoadingDataAdmin">
+    <main class="mb-3">
+        <div class="container mt-4">
+            <div class="card">
+                <br>
+                <h2 align="center">RAZAS DE ANIMALES</h2>
+                <div class="mb-3">
+                    <p-button type="button" icon="pi pi-chevron-left" (click)="prev()" [disabled]="isFirstPage()"
+                        styleClass="p-button-text"></p-button>
+                    <p-button type="button" icon="pi pi-refresh" (click)="resetTemplate()"
+                        styleClass="p-button-text"></p-button>
+                    <p-button type="button" icon="pi pi-chevron-right" (click)="next()" [disabled]="isLastPage()"
+                        styleClass="p-button-text"></p-button>
+                    <button pripple="" class="p-ripple p-element p-button-text p-button p-component p-button-icon-only"
+                        type="button" (click)="showMaximizableDialog()">
+                        <span class="pi pi-plus p-button-icon ng-star-inserted" aria-hidden="true"></span>
+                        <span class="p-ink"></span>
+                    </button>
+                </div>
+
+                <p-table [value]="razas" [paginator]="true" [rows]="rows" [showCurrentPageReport]="true"
+                    [(first)]="first" [tableStyle]="{'min-width': '50rem'}"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [rowsPerPageOptions]="[5, 7,10]">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width:8%;">Id</th>
+                            <th style="width:20%;">Nombre</th>
+                            <th style="width:30%;">Descripción</th>
+                            <th style="width:15%;">Tipo</th>
+                            <th style="width: 10%;">Editar</th>
+                            <!-- <th style="width: 10%;">Eliminar</th> -->
+                            <th style="width:15%;">Reportes</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-raza>
+                        <tr>
+                            <td>{{raza.id_razaanimal}}</td>
+                            <td>{{raza.nombreraza}}</td>
+                            <td>{{raza.descripcion}}</td>
+                            <td>{{raza.razaAnimal.nombretipo}}</td>
+
+                            <td>
+                                <button pButton type="button"
+                                    class="p-button-raised p-button-rounded p-button-rounded-yellow"
+                                    (click)="showMaximizableDialog()" (click)="showMaximizableDialog()"
+                                    (click)="editRaza(raza)" style="background-color: rgb(254, 158, 3); border: none;">
+                                    <i class="pi pi-pencil"></i></button>
+                            </td>
+
+                            <td>
+                                <p-dropdown
+                                    (onChange)="generateReporOftRazaOfBest(raza.id_razaanimal, $event, raza.nombreraza)"
+                                    [options]="sortOptionsAnimalBestTop" placeholder="Imprimir TOP" optionLabel="label"
+                                    [showClear]="true">
+                                    <ng-template let-option pTemplate="selectedItem">
+                                        <i [class]="option.icon"></i> {{option.label}}
+                                    </ng-template>
+                                    <ng-template let-option pTemplate="item">
+                                        <i [class]="option.icon"></i> {{option.label}}
+                                    </ng-template>
+                                </p-dropdown>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+<!--    inicio: template form - register/edit - razaAnimal  -->
+
+<p-dialog header="Formulario: Raza" [(visible)]="displayMaximizable" [modal]="true" [style]="{width: '30vw'}"
+    [draggable]="false" [resizable]="false" (onHide)="clearForm()">
+    <form FormGroup="form" (ngSubmit)="create()" ngNativeValidate>
+        <div class="mb-2 form-floating">
+            <!-- Codigo del combo -->
+            <select id="tipos" class="form-select" name="categoria" (change)="categoriaProduct($event)"
+                (onHide)="clearForm()">
+                <option (ngValue)="undefined" required>Seleccione categoría</option>
+                <option *ngFor="let cat of tipos" [value]="cat.id_tipoanimal">{{cat.nombretipo}}
+                </option>
+            </select>
+            <label for="categoria">Categoría</label>
+        </div>
+        <div class="mb-2">
+            <label for="text" class="form-label">Nombre</label>
+            <input type="text" pInputText class="form-control" [(ngModel)]="raza.nombreraza" name="nombreraza" required
+                id="txt_nombre">
+        </div>
+        <div class="mb-2">
+            <label for="text" class="form-label">Descripción</label>
+            <textarea [rows]="5" [cols]="30" pInputTextarea [autoResize]="true" type="text" class="form-control"
+                [(ngModel)]="raza.descripcion" name="descripcion" required id="txt_descripcion"></textarea>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-6">
+                <button id="bntRegistrar" class="btn btn-primary" role="button"
+                    style="background-color: rgb(31, 189, 90); border: none;"
+                    [disabled]="isDisabledRazaCreate">Registrar</button>
+            </div>
+        </div>
+    </form>
+</p-dialog>
+
+
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="50000"
+    rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+
+<p-toast></p-toast>
+<!--    fin: template form - register/edit - tipoAnimal  -->

@@ -1,0 +1,61 @@
+/* 
+  .pi {
+    font-size: 300px;
+  } */
+
+#tabla1 {
+  display: block;
+}
+
+#tabla2 {
+  display: none;
+}
+
+
+.hover-color {
+  background-color: rgb(148, 148, 231);
+  color: white;
+  padding: 20px;
+  transition: background-color 0.5s ease;
+}
+
+.hover-color:hover {
+  background-color: rgb(87, 119, 83);
+}
+
+
+/* Implementacion de otro cod para el diseño */
+
+* {
+  font-size: 16px;
+}
+
+body {
+  position: relative;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+
+h2 {
+  font-size: 2em;
+  margin-top: 1em;
+
+}
+
+th {
+  font-size: 1.1em;
+}
+
+tr {
+  font-weight: 600;
+}
+
+
+
+tr:hover {
+  background-color: rgb(245, 245, 245);
+}
+
+#bntRegistrar:hover {
+  background-color: rgb(21, 125, 60);
+}

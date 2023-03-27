@@ -1,0 +1,446 @@
+<!-- <div class="container-fluid"> -->
+<div class="container">
+
+  <div class="row justify-content-center rounded shadow p-1 mt-4 mx-2 mb-2">
+    <div class="col-11 col-sm-10 col-md-10 col-lg-6 col-xl-5 text-center p-0 mt-1 mb-2 ">
+      <div class="card px-6 pt-4 pb-6 mt-1 mb-3">
+        <h2 id="heading">Registra tu Cuenta de Usuario</h2>
+        <p>Sigue todos los pasos para crear tu cuenta</p>
+        <form id="msform">
+          <!-- progressbar -->
+          <ul id="progressbar">
+            <li class="active" id="account"><strong>Cuenta</strong></li>
+            <li id="personal"><strong>Personal</strong></li>
+            <li id="payment"><strong>Imagen</strong></li>
+            <li id="confirm"><strong>Preferencias</strong></li>
+          </ul>
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0"
+              aria-valuemax="100"></div>
+          </div> <br> <!-- fieldsets -->
+          <fieldset>
+            <div class="form-card">
+              <div class="row">
+                <div class="col-7">
+                  <h2 class="fs-title">Información de cuenta:</h2>
+                </div>
+                <div class="col-5">
+                  <h2 class="steps">Paso 1 - 4</h2>
+                </div>
+              </div>
+
+              <!-- Desde aqui se procede a implementar la informacion de la creacion del usuario-->
+              <!-- <h6>Ingreso de usuario</h6> -->
+              <!-- Implementacion del layaut del contenedor -->
+              <div class="grid p-fluid">
+
+                <!-- Implementacion del campo de usuario con la correspondiente validacion  -->
+                <div class="col-12 md:col-12">
+
+                  <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                    <input type="text" pattern="^\S+$" pInputText id="usuario" name="usuario" [(ngModel)]="user.usuario"
+                      placeholder="Username" (input)="contatSpace($event)" (blur)="checkInputValue($event)" required
+                      #usernameInput="ngModel" [maxlength]="12">
+                    <div class="icon-container">
+                      <i class="pi pi-exclamation-circle icon"
+                        *ngIf="usernameInput.invalid && usernameInput.touched || uservalida"></i>
+                    </div>
+                  </div>
+                  <div *ngIf="usernameInput.invalid && usernameInput.touched || uservalida" class="text-danger">
+                    El usuario es obligatorio
+                  </div>
+                  <style>
+                    input.ng-invalid.ng-touched {
+                      border-color: #f59090;
+                    }
+                  </style>
+
+
+
+                </div>
+                <!-- Fin de la Implementacion del campo de usuario con la correspondiente validacion  -->
+
+                <!-- Implementacion del campo de contraseña con la correspondiente validacion  -->
+                <div class="col-12 md:col-12">
+                  <p-password id="contrasenia" name="contrasenia" [(ngModel)]="user.contrasenia" [toggleMask]="true"
+                    placeholder="Password" (input)="contatSpace($event)" required #contraseniaInput="ngModel" (keydown)="validarLongitudContra($event)">
+                    <ng-template pTemplate="header">
+                      <h6>Pick a password</h6>
+                    </ng-template>
+                    <ng-template pTemplate="footer">
+                      <p-divider></p-divider>
+                      <p class="mt-2">Su contraseña debe cumplir los siguientes requisitos</p>
+                      <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
+                        <li>Al menos una minúscula</li>
+                        <li>Al menos una mayúscula</li>
+                        <li>Al menos un número</li>
+                        <li>Mínimo 8 caracteres</li>
+                      </ul>
+                    </ng-template>
+                  </p-password>
+                  <div *ngIf="contraseniaInput.invalid && contraseniaInput.touched || passvalida" class="text-danger">
+                    La contraseña para este usuario es requerido
+                  </div>
+                  <style>
+                    input.ng-invalid.ng-touched {
+                      border-color: #f59090;
+                    }
+                  </style>
+                </div>
+                <!-- Fin de Implementacion del campo de contraseña con la correspondiente validacion  -->
+
+                <!--Implementacion del campo de repetir contraseña con la correspondiente validacion  -->
+                <div class="col-12 md:col-12">
+
+                  <div class="con">
+
+
+                    <p-password id="contraseniarep" name="contraseniarep" [(ngModel)]="passwordR.passwordU"
+                      [feedback]="false" placeholder="Repeat Password" (input)="contatSpace($event)"
+                      (input)="validarMismaPassword($event)" required #contraseniarInput="ngModel" (keydown)="validarLongitudContra($event)">
+                    </p-password>
+                  </div>
+                  <div *ngIf="passwordIgual" class="text-danger">
+                    Las contraseñas no coinciden
+                  </div>
+                  <style>
+                    input.ng-invalid.ng-touched {
+                      border-color: #f59090;
+                    }
+                  </style>
+
+
+                  <!-- <p-password [(ngModel)]="value3" [toggleMask]="true"></p-password> -->
+                </div>
+                <!--Fin de la Implementacion del campo de repetir contraseña con la correspondiente validacion  -->
+
+              </div>
+              <!-- Fin de la creacion del usuario -->
+            </div>
+
+            <button name="button" name="next" id="next" class="{{className}} action-button"
+              (click)="onNextClick($event, 1)">Continuar</button>
+            <!-- <input type="button" name="next" id="next" class="{{className}} action-button" value="Siguiente" (click)="onNextClick($event, 2)"/> -->
+
+          </fieldset>
+
+          <fieldset> <!-- Segunda parte del formulario-->
+            <div class="form-card">
+              <div class="row">
+                <div class="col-7">
+                  <h2 class="fs-title">Información personal:</h2>
+                </div>
+                <div class="col-5">
+                  <h2 class="steps">Paso 2 - 4</h2>
+                </div>
+              </div>
+
+              <!-- Proceso de la creacion de la persona -->
+
+
+              <div class="grid p-fluid">
+
+                <!--Implementacion del campo cedula -->
+                <!-- <div class="col-12 md:col-4">
+                  <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon"><i class="pi pi-id-card"></i></span>
+                    <input type="text" pInputText placeholder="Cédula" id="cedula" name="cedula"
+                      [(ngModel)]="persona.cedula" (input)="contatSpace($event)" (blur)="checkInputValueCedula($event)"
+                      onkeypress='return event.charCode >= 48 && event.charCode <= 57' required #cedulaInput="ngModel">
+                    <div class="icon-container">
+                      <i class="pi pi-exclamation-circle icon"
+                        *ngIf="cedulaInput.invalid && cedulaInput.touched || cedulaValida"></i>
+                    </div>
+                  </div>
+
+                </div> -->
+
+                <div class="col-12 md:col-4">
+                  <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon"><i class="pi pi-id-card"></i></span>
+                    <input type="text" pInputText placeholder="Cédula o RUC" id="cedula" name="cedula"
+                      [(ngModel)]="persona.cedula" (input)="contatSpace($event)" (blur)="checkInputValueCedula1($event)"
+                      onkeypress='return event.charCode >= 48 && event.charCode <= 57'  maxlength="14"
+                      (ngModelChange)="formatCedula($event)"
+                      required #cedulaInput="ngModel" (keydown)="onDeleteKeyDown($event)">
+                    <div class="icon-container">
+                      <i class="pi pi-exclamation-circle icon"
+                        *ngIf="cedulaInput.invalid && cedulaInput.touched || cedulaValida"></i>
+                    </div>
+                  </div>
+                </div>
+                
+
+                <!--Fin de la Implementacion del campo cedula -->
+
+                <!--Implementacion del campo nombres -->
+                <div class="col-12 md:col-4">
+                  <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                    <input type="text" pInputText placeholder="Nombres" id="nombres" name="nombres"
+                      [(ngModel)]="persona.nombres" required #nombresInput="ngModel"
+                      onkeypress='return event.charCode >= 65 && event.charCode <= 90 || event.charCode >= 97 && event.charCode <= 122 || event.charCode == 32'>
+                    <div class="icon-container">
+                      <i class="pi pi-exclamation-circle icon"
+                        *ngIf="nombresInput.invalid && nombresInput.touched || nombresValida"></i>
+                    </div>
+                  </div>
+
+                </div>
+                <!--Fin de la Implementacion del campo nombres -->
+
+                <!--Implementacion del campo genero con el combobox -->
+                <div class="col-12 md:col-4">
+                  <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon"><i class="pi pi-users"></i></span>
+                    <select pInputText placeholder="Sexo" id="genero" name="genero" (change)="filtersImplements($event)"
+                      required>
+                      <option value="">Seleccione su género</option>
+                      <option value="Masculino">Masculino</option>
+                      <option value="Femenino">Femenino</option>
+                    </select>
+                  </div>
+                </div>
+                <!--Fin de la Implementacion del campo genero con el combobox -->
+
+              </div>
+
+
+              <div class="grid p-fluid">
+
+                <!--Implementacion del campo dirección-->
+                <div class="col-12 md:col-7">
+                  <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon"><i class="pi pi-directions"></i></span>
+                    <input type="text" pInputText placeholder="Dirección" id="direccion" name="direccion"
+                      [(ngModel)]="persona.direccion" required #direccionInput="ngModel">
+                    <div class="icon-container">
+                      <i class="pi pi-exclamation-circle icon"
+                        *ngIf="direccionInput.invalid && direccionInput.touched || direccionValida"></i>
+                    </div>
+                  </div>
+
+                </div>
+                <!--Fin de la Implementacion del campo dirección-->
+
+                <!--Implementacion del campo telefono-->
+                <div class="col-12 md:col-5">
+                  <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon"><i class="pi pi-phone"></i></span>
+                    <input type="text" pInputText placeholder="Teléfono" id="telefono" name="telefono"
+                      [(ngModel)]="persona.telefono" (input)="contatSpace($event)"
+                      onkeypress='return event.charCode >= 48 && event.charCode <= 57' required
+                      #telefonoInput="ngModel">
+                    <div class="icon-container">
+                      <i class="pi pi-exclamation-circle icon"
+                        *ngIf="telefonoInput.invalid && telefonoInput.touched || telefonoValida"></i>
+                    </div>
+                  </div>
+
+                </div>
+                <!--Fin de la Implementacion del campo telefono-->
+
+              </div>
+
+
+              <div class="grid p-fluid">
+
+                <!--Implementacion del campo correo-->
+                <div class="col-12 md:col-6">
+
+                  <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon"><i class="pi pi-google"></i></span>
+                    <input type="text" pInputText placeholder="Correo electrónico" id="correo" name="correo"
+                      [(ngModel)]="persona.correo" (input)="contatSpace($event)" (blur)="checkInputValueCorreo($event)"
+                      required #correoInput="ngModel">
+                    <div class="icon-container">
+                      <i class="pi pi-exclamation-circle icon"
+                        *ngIf="correoInput.invalid && correoInput.touched || correoValida"></i>
+                    </div>
+                  </div>
+
+
+                </div>
+
+                <!--Fin de la Implementacion del campo correo-->
+
+                <!-- Implementacion del campo fecha -->
+                <div class="col-12 md:col-3">
+                  <div class="p-inputgroup">
+
+                    <p-calendar inputId="edad" name="edad" id="edad" [(ngModel)]="persona.edad" class="ng-dirty"
+                      [showIcon]="true" placeholder="Fecha"></p-calendar>
+
+                  </div>
+                </div>
+                <!-- Fin de la implemtacin del campo fecha -->
+                <!--Implementacion del campo celular-->
+                <div class="col-12 md:col-3">
+                  <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon"><i class="pi pi-whatsapp"></i></span>
+                    <input type="text" pInputText placeholder="Celular" id="celular" name="celular"
+                      [(ngModel)]="persona.celular" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                      required #celularInput="ngModel">
+                    <div class="icon-container">
+                      <i class="pi pi-exclamation-circle icon"
+                        *ngIf="celularInput.invalid && celularInput.touched || celularValida"></i>
+                    </div>
+                  </div>
+                </div>
+                <!--Fin de la Implementacion del campo celular-->
+
+
+
+              </div>
+              <!-- Fin Proceso de la creacion de la persona -->
+
+
+            </div>
+            <input type="button" name="next" id="next" class="{{className}} action-button" value="Siguiente"
+              (click)="onNextClick($event, 2)" />
+            <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+          </fieldset>
+
+          <fieldset>
+            <div class="form-card">
+              <div class="row">
+                <div class="col-7">
+                  <h2 class="fs-title">Foto de perfil:</h2>
+                </div>
+                <div class="col-5">
+                  <h2 class="steps">Paso 3 - 4</h2>
+                </div>
+              </div>
+
+              <!-- Inicio de la foto del usuario -->
+
+              <div class="row justify-content-center">
+                <div class="col-3">
+                  <img
+                    [src]="persona.foto ? 'data:image/jpeg;base64,' + persona.foto : '../../../../assets/img/fotonull.png'"
+                    alt="" width="200px" height="200px" class="rounded-circle mb-3">
+                </div>
+
+
+              </div>
+              <div class="row justify-content-center">
+                <div class="col-7 text-center">
+                  <h5 class="purple-text text-center"><input id="picture" type="file"
+                      accept="image/jpeg, image/jpg, image/png" (change)="loadPictureUser($event)" placeholder="Picture"
+                      name=" picture" class="form-control form-control-sm"></h5>
+                </div>
+              </div>
+
+
+            </div>
+
+            <!-- <input type="button" name="next" id="next" class="{{className}} action-button" value="Siguiente"
+            (click)="onNextClick($event, 2)" />
+
+          <p-button (click)="confirm1()" icon="pi pi-check" label="Confirm" styleClass="mr-2"></p-button> -->
+
+            <input type="button" name="next" class="{{className}} action-button" value="Siguiente" />
+
+            <!-- <input type="button" name="next" class="next action-button" value="Enviar" (click)="confirm1()"
+              (click)="savePersona()" /> -->
+
+
+            <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+          </fieldset>
+
+
+          <!-- Implementacion de la parte de las preferencias de usuario -->
+
+
+
+          <fieldset>
+            <div class="form-card">
+              <div class="row">
+                <div class="col-7">
+                  <h2 class="fs-title">Preferencias de razas de animales: Min 1 - Max 10</h2>
+                </div>
+                <div class="col-5">
+                  <h2 class="steps">Paso 4 - 4</h2>
+                </div>
+              </div>
+
+              <div class="rounded shadow p-3 mb-2">
+
+                <div style="width:100%; overflow:auto; max-height:420px;">
+                  <div class="conta">
+                    <div div *ngFor="let tipo of tipos" class="card mb-3" style="max-width: 18rem; min-width: 18rem;">
+                      <div class="card-header text-center fw-bold">
+                        <!-- <img src="../../../../assets/img/fondo.jpg" class="card-img-top" alt="..."> -->
+                        <img [src]="'data:image/jpeg;base64,' + tipo.foto" class=" rounded-circle mb-3" alt="..."
+                          width="90px" height="90px"> <br>
+                        <!-- <img src="../../../../assets/img/fondo.jpg" class="card-img-top" alt="..."> -->
+                        <!-- <input type="checkbox" (change)="onTipoSeleccionado(tipo)" [checked]="tipo.selected"> -->
+                        {{tipo.nombretipo}}
+                      </div>
+                      <div class="card-body" style="background-color: rgb(173, 173, 173);">
+
+                        <div>
+
+                        <!-- <div *ngIf="tipo.selected"> -->
+                          <div style="margin-left: 10px;">
+                            <strong>Seleccione: </strong>
+
+                            <div style="margin-left: 12px;"
+                              *ngFor="let raza of filtrarRazasPorTipo(tipo.id_tipoanimal)">
+
+                              <input type="checkbox" [disabled]="selectedRazasIds.length >= 10 && !raza.selected"
+                                (change)="onRazaSeleccionada(raza)" [checked]="raza.selected">
+                              {{raza.nombreraza}}
+                            </div>
+                          </div>
+
+                        </div>
+                        <!-- <div class="card-text">{{client.name}}</div> -->
+                      </div>
+
+                      <!-- <div class="card-footer text-muted text-center">{{client.date | date:'dd-MM-yyyy'}}</div> -->
+                    </div>
+
+                  </div>
+                </div>
+
+
+                <div class="row">
+                  <div class="col-7">
+                    <h6>Razas seleccionadas: <strong>{{espacioLista}} de 10</strong> </h6>
+                    <div *ngFor="let raza of razasSeleccionadas" style="margin-left: 5px;">
+                      <h6> - {{raza.nombreraza}}</h6>
+
+                    </div>
+                  </div>
+                  <div class="col-5">
+                    <input type="checkbox" id="correo_notifica" name="correo_notifica"
+                      [(ngModel)]="persona.correo_notifica" style="margin-right: 3px;">¿Está de acuerdo en que le
+                    enviemos correos?
+                  </div>
+                </div>
+                <!--  -->
+
+              </div>
+
+
+            </div>
+
+            <input type="button" name="next" class="{{className}} action-button" value="Finalizar"
+              (click)="onNextClick($event, 3)" />
+
+            <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+          </fieldset>
+          <!-- Fin de la implementacion de las preferencias del usuario -->
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"
+  rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+
+
+<p-toast></p-toast>

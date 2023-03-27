@@ -1,0 +1,23 @@
+<!-- Primera sección -->
+<div id="offline-section" *ngIf="netStatus === 'offline'">
+    <div class="network-status">
+        <div class="network-status__icon">
+            <i class="fas fa-wifi"></i>
+        </div>
+        <h4 class="network-status__title">No hay conexión a Internet</h4>
+        <p class="network-status__message">Parece que no estás conectado a Internet en este momento. Por favor, revisa
+            tu conexión y vuelve a intentarlo.</p>
+        <button class="network-status__button" (click)="reloadPage()">Reintentar</button>
+    </div>
+</div>
+
+<!-- Segunda sección -->
+<div id="online-section">
+    <div *ngIf="netStatus === 'online'">
+        <app-header></app-header>
+        <div class="main-content">
+            <router-outlet></router-outlet>
+        </div>
+        <app-footer></app-footer>
+    </div>
+</div>

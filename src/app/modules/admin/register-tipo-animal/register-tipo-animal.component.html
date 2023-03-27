@@ -1,0 +1,126 @@
+<!---->
+<div class="overlay" *ngIf="isLoadingDataAdmin">
+    <div class="cs-loader">
+        <div class="cs-loader-inner">
+            <label>●</label>
+            <label>●</label>
+            <label>●</label>
+            <label>●</label>
+            <label>●</label>
+            <label>●</label>
+        </div>
+    </div>
+
+</div>
+<div *ngIf="!isLoadingDataAdmin">
+    <main class="mb-3">
+        <div class="container mt-4">
+            <div class="card">
+                <br>
+                <h2 align="center">TIPOS DE ANIMALES</h2>
+                <div class="mb-3">
+                    <p-button type="button" icon="pi pi-chevron-left" (click)="prev()" [disabled]="isFirstPage()"
+                        styleClass="p-button-text"></p-button>
+                    <p-button type="button" icon="pi pi-refresh" (click)="resetTemplate()"
+                        styleClass="p-button-text"></p-button>
+                    <p-button type="button" icon="pi pi-chevron-right" (click)="next()" [disabled]="isLastPage()"
+                        styleClass="p-button-text"></p-button>
+                    <button pripple="" class="p-ripple p-element p-button-text p-button p-component p-button-icon-only"
+                        type="button" (click)="showMaximizableDialog()">
+                        <span class="pi pi-plus p-button-icon ng-star-inserted" aria-hidden="true"></span>
+                        <span class="p-ink"></span>
+                    </button>
+                </div>
+                <p-table [value]="tipos" [paginator]="true" [rows]="rows" [showCurrentPageReport]="true"
+                    [(first)]="first" [tableStyle]="{'min-width': '50rem'}"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [rowsPerPageOptions]="[5, 7, 10]">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <!-- <th style="width:8%">Id</th> -->
+                            <th style="width:20%">Nombre</th>
+                            <th style="width:30%">Descripción</th>
+                            <th style="width:15%;">Foto</th>
+                            <th style="width: 10%;">Reportes</th>
+                            <th style="width: 10%;">Editar</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-tipo>
+                        <tr>
+                            <td>{{tipo.nombretipo}}</td>
+                            <td>{{tipo.descripcion}}</td>
+
+                            <!-- <td><img [src]="'data:image/jpeg;base64,' + tipo.foto" alt="" width="60%" height="60%"
+                                    class="rounded-circle">
+                            </td> -->
+                            <td><img [src]="'data:image/jpeg;base64,' + tipo.foto" alt="" width="70px" height="70px"
+                                class="rounded-circle"></td>
+
+                            <td>
+                                <button pButton type="button"
+                                    class="p-button-raised p-button-rounded p-button-rounded-yellow"
+                                    (click)="getReportOfUserRequest(tipo.id_tipoanimal, tipo.nombretipo)"
+                                    style="background-color: rgb(97, 94, 103); border: none;">
+                                    <i class="pi pi-print"></i></button>
+                            </td>
+                            <td>
+                                <button pButton type="button"
+                                    class="p-button-raised p-button-rounded p-button-rounded-yellow"
+                                    (click)="showMaximizableDialog()" (click)="editTipo(tipo)"
+                                    style="background-color: rgb(254, 158, 3); border: none;">
+                                    <i class="pi pi-pencil"></i></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+
+    </main>
+</div>
+<p-dialog header="Formulario: Tipo" [(visible)]="displayMaximizable" [modal]="true" [style]="{width: '30vw'}"
+    [draggable]="false" [resizable]="false" (onHide)="clearForm()">
+    <form FormGroup="form" (ngSubmit)="create()" ngNativeValidate>
+        <div class="row mt-2">
+            <div class="col-md-12 d-flex justify-content-center align-items-center">
+                <div class="text-center"
+                    style="border: 3px solid rgb(97, 94, 103); border-radius: 50%; box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);">
+                    <!-- <img [src]="tipo.foto ? 'data:image/jpeg;base64,' + tipo.foto : '../../../../assets/img/animalNull.jpg'"
+                        alt="" (click)="fileInput.click()" [style.max-height]="'150px'" [style.min-height]="'150px'"
+                        style="border-radius: 50%;"> -->
+                        <img [src]="tipo.foto ? 'data:image/jpeg;base64,' + tipo.foto : '../../../../assets/img/animalNull.jpg'"
+                        alt="" (click)="fileInput.click()" width="150px" height="150px" style="border-radius: 50%;">
+                    <input type="file" #fileInput style="display: none;" accept="image/jpeg, image/jpg, image/png"
+                        (ngModelChange)="onFileSelected()" (change)="loadPictureTypeAnimal($event)">
+                </div>
+            </div>
+            <label align="center">Seleccione una imagen:</label>
+        </div>
+
+        <div class="mb-2">
+            <label for="text" class="form-label">Nombre</label>
+            <input pInputText type="text" class="form-control" [(ngModel)]="tipo.nombretipo" name="nombretipo" required
+                id="txt_nombre">
+        </div>
+
+        <div class="mb-2">
+            <label for="text" class="form-label">Descripción</label>
+
+            <textarea [rows]="5" [cols]="30" pInputTextarea [autoResize]="true" type="text" class="form-control"
+                [(ngModel)]="tipo.descripcion" name="descripcion" required id="txt_descripcion"></textarea>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-6">
+                <button id="bntRegistrar" class="btn btn-primary" role="button"
+                    style="background-color: rgb(31, 189, 90); border: none;"
+                    [disabled]="isDisabledTipoCreate">Registrar</button>
+            </div>
+        </div>
+    </form>
+</p-dialog>
+
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="50000"
+    rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+
+<p-toast></p-toast>

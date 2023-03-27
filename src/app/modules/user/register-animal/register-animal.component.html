@@ -1,0 +1,254 @@
+<div class="container-fluid mt-3 ">
+  <div class="row mx-5 ml-5">
+
+    <!-- Inicio -->
+
+    <form ngNativeValidate>
+      <div class="row rounded mb-3" style="box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);">
+
+
+        <!-- <h2 class="header mt-3 mb-3 " style="text-align: center;">FORMULARIO DE REGISTRO DE ANIMALES</h2> -->
+        <h2 class="header mt-3 mb-3" style="text-align: center;">
+          {{ animal.id_animal ? 'FORMULARIO DE ACTUALIZACIÓN DE ANIMAL' : 'FORMULARIO DE REGISTRO DE ANIMAL' }}
+        </h2>
+
+
+        <div class="col-md-5">
+
+          <div class="row mt-2" style="text-align: center;">
+            <div class="col-md-12 d-flex justify-content-center align-items-center">
+              <div class="text-center" style="border: 3px solid black;" class="row rounded"
+                style="box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);">
+                <img
+                  [src]="animal.foto ? 'data:image/jpeg;base64,' + animal.foto : '../../../../assets/img/animals.jpg'"
+                  alt="" (click)="fileInput.click()" [style.max-height]="'90px'" [style.min-height]="'90px'">
+                <input type="file" #fileInput style="display: none;" accept="image/jpeg, image/jpg, image/png"
+                  (ngModelChange)="on1FileSelected()" (change)="loadAnimalPicture($event)">
+              </div>
+            </div>
+            <span style="font-weight: bold;
+            color: #333;
+            text-transform: uppercase;"> Seleccione una foto</span>
+          </div>
+
+          <div class="rounded shadow p-2">
+            <div class="grid p-fluid ">
+
+              <div class="col-12 md:col-12">
+                <div class="p-inputgroup">
+                  <span class="p-inputgroup-addon"><i class="pi pi-users"></i></span>
+                  <select pInputText placeholder="tipo" id="tipo" name="tipo" *ngIf="!animal.id_animal"
+                    (change)="capturaidTipoAnimal($event)" required>
+                    <option value="">Seleccione la categoría</option>
+                    <option *ngFor="let cat of tiposAnimales" [value]="cat.id_tipoanimal">{{cat.nombretipo}}</option>
+                  </select>
+
+                  <!-- Muestra el segundo select si animal.id_animal no está vacío -->
+                  <select pInputText placeholder="tipo" [(ngModel)]="animal?.raAnimal?.razaAnimal.id_tipoanimal" 
+                    id="razaAnimal" name="razaAnimal" *ngIf="animal.id_animal" (change)="capturaidTipoAnimal($event)"
+                    required>
+                    <option (ngValue)="undefined">Seleccione la categoría</option>
+                    <option *ngFor="let cat of tiposAnimales" [value]="cat.id_tipoanimal">{{cat.nombretipo}}</option>
+                  </select>
+                  <!-- FIN DEL PRIMER SELECT -->
+
+                </div>
+              </div>
+
+              <div class="col-12 md:col-12">
+                <div class="p-inputgroup">
+                  <span class="p-inputgroup-addon"><i class="icono fa-solid fa-earth-americas"></i></span>
+                  <select pInputText placeholder="categoria" id="categoria" name="raza" (change)="categoriaRaza($event)" *ngIf="!animal.id_animal"
+                    required>
+                    <option value="">Seleccione la raza </option>
+                    <option *ngFor="let cat of filtroRaza" [value]="cat.id_razaanimal">{{cat.nombreraza}}
+                    </option>
+                  </select>
+
+                  <!-- Muestra el segundo select si animal.id_animal no está vacío -->
+                  <select pInputText placeholder="raza" [(ngModel)]="animal.raAnimal.id_razaanimal"
+                    id="raza" name="raza" *ngIf="animal.id_animal" (change)="categoriaRaza($event)"
+                    required>
+                    <option (ngValue)="undefined">Seleccione la categoría</option>
+                    <option *ngFor="let cat of filtroRaza" [value]="cat.id_razaanimal">{{cat.nombreraza}}</option>
+                  </select>
+                  <!-- FIN DEL PRIMER SELECT -->
+                </div>
+              </div>
+
+            </div>
+
+            <div class="grid p-fluid ">
+
+              <div class="col-12 md:col-12">
+                <div class="p-inputgroup">
+                  <span class="p-inputgroup-addon"><i class="icono fas fa-paw"></i></span>
+                  <input type="text" pattern="[A-Za-z]+" pInputText placeholder="Nombre" id="nombre" name="nombre"
+                    [(ngModel)]="animal.nombre"
+                    onkeypress='return event.charCode >= 65 && event.charCode <= 90 || event.charCode >= 97 && event.charCode <= 122 || event.charCode == 32'
+                    required>
+                </div>
+              </div>
+
+              <div class="col-12 md:col-12">
+                <div class="p-inputgroup">
+                  <span class="p-inputgroup-addon"><i class="icono fa-solid fa-venus-mars"></i></span>
+
+                  <select pInputText [(ngModel)]="animal.genero" placeholder="sexo" id="sexo" name="sexo"
+                    (change)="filtersImplements($event)" required>
+                    <option value="" [selected]="!animal?.genero">Seleccione el género de su animal:</option>
+                    <option value="Macho" [selected]="animal?.genero === 'Macho'">Macho</option>
+                    <option value="Hembra" [selected]="animal?.genero === 'Hembra'">Hembra</option>
+                  </select>
+
+                </div>
+              </div>
+
+            </div>
+
+            <div class="grid p-fluid ">
+
+              <div class="col-12 md:col-6">
+                <div class="p-inputgroup">
+                  <span class="p-inputgroup-addon"><i class="icono fas fa-tint"></i></span>
+
+                  <input type="text" pattern="[A-Za-z]+" pInputText placeholder="Color" id="color" name="color"
+                    [(ngModel)]="animal.color"
+                    onkeypress='return event.charCode >= 65 && event.charCode <= 90 || event.charCode >= 97 && event.charCode <= 122 || event.charCode == 32'
+                    required>
+
+                </div>
+              </div>
+
+
+              <div class="col-12 md:col-6">
+                <div class="p-inputgroup">
+                  <span class="p-inputgroup-addon"><i class="icono fa-solid fa-calendar-days"></i></span>
+                  <input step="any" type="number" [min]="0" [max]="100" pInputText placeholder="Edad" id="edad"
+                    name="edad" [(ngModel)]="animal.edad"
+                    onkeypress='return event.charCode >= 48 && event.charCode <= 57' required>
+                </div>
+              </div>
+
+            </div>
+            <!--  -->
+            <div class="grid p-fluid ">
+
+
+              <div class="col-12 md:col-6">
+                <div class="p-inputgroup">
+                  <span class="p-inputgroup-addon"><i class="icono fa-solid fa-weight-scale"></i></span>
+                  <input type="text" pInputText placeholder="Peso" id="peso" name="peso" [(ngModel)]="animal.peso"
+                    onkeypress='return event.charCode >= 48 && event.charCode <= 57' required pattern="^[0-9]*$">
+                </div>
+              </div>
+
+              <div class="col-12 md:col-6">
+                <div class="p-inputgroup">
+                  <span class="p-inputgroup-addon"><i class="pi pi-users"></i></span>
+                  <select pInputText placeholder="disponibilidad" [(ngModel)]="animal.disponibilidad"
+                    id="disponibilidad" name="disponibilidad" (change)="disponibilidad($event)" required>
+                    <option value="">Disponibilidad </option>
+                    <option [value]="true" [selected]="animal.disponibilidad">Disponible</option>
+                    <option [value]="false" [selected]="!animal.disponibilidad">Ocupado</option>
+                  </select>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <h3 class="mt-3">Formas de cobro</h3>
+
+          <div class="rounded shadow p-2">
+
+            <div class="p-fluid grid">
+              <div class="field col-12 md:col-6">
+                <div class="p-inputgroup">
+                  <span class="p-inputgroup-addon">
+                    <i class="pi pi-android"></i>
+                  </span>
+                  <span class="p-float-label">
+                    <input type="number" id="trueque" name="trueque" pInputText
+                      [(ngModel)]="animal_precio_trueq.trueque" min="1" max="2"
+                      onkeypress='return event.charCode >= 49 && event.charCode <= 51' required>
+                    <label for="inputgroup">Número de crías a cambio</label>
+                  </span>
+                </div>
+              </div>
+
+              <div class="field col-12 md:col-6">
+                <div class="p-inputgroup">
+                  <span class="p-inputgroup-addon">
+                    <i class="pi pi-dollar"></i>
+                  </span>
+                  <span class="p-float-label">
+                    <input type="number" id="precio" name="precio" pInputText [(ngModel)]="animal_precio_trueq.precio1"
+                      required>
+                    <label for="inputgroup">Precio del préstamo</label>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="col-md-7 d-flex flex-column justify-content-center align-items-center"
+          style="min-height: 630px; background-color: rgb(240, 249, 250); position: relative; border-radius: 20px;">
+          <div class="form-group mb-5" style="border: 2px dashed #ccc; padding: 30px; border-radius: 10px;">
+            <label for="archivo" class="font-weight-bold mb-3">Seleccionar archivo PDF:</label>
+
+            <div class="custom-file custom-file-container">
+              <input type="file" #fileIn accept="application/pdf" class="custom-file-input" id="archivo"
+                (change)="onFileSelected($event)" style="display: none;">
+              <label class="custom-file-label text-center" for="archivo">Para poder subir su ficha médica de su animal,
+                haga clic aquí.</label>
+            </div>
+
+          </div>
+          <div class="mt-5">
+            <i class="fa fa-upload fa-3x"></i>
+          </div>
+
+          <!-- <div class="mx-2" *ngIf="fileUrl" style="position: absolute; left: 0; right: 0; top: 0; bottom: 0;">
+            <embed style="border-radius: 10px; " [src]="fileUrl" type="application/pdf" width="100%" height="100%" />
+          </div> -->
+          <div class="mx-2" *ngIf="fileUrl" style="position: absolute; left: 0; right: 0; top: 0; bottom: 0;">
+            <div style="position: absolute; top: 5px; right: 5px;">
+              <button class="btn btn-primary" (click)="fileIn.click()">{{ animal.id_animal ? 'Actializar ficha medica' :
+                'Cambiar ficha' }}</button>
+            </div>
+            <embed style="border-radius: 10px; " [src]="fileUrl" type="application/pdf" width="100%" height="100%" />
+          </div>
+
+
+        </div>
+
+
+        <div class="d-flex justify-content-center mt-4 mb-3">
+          <p-button type="submit" icon="pi pi-check" [label]="animal.id_animal ? 'Actualizar' : 'Registrar'"
+            styleClass="mr-3" (onClick)="updateDataAnimal()"></p-button>
+
+          <p-button label="Cancelar" icon="pi pi-times" styleClass="custom-button"
+            (click)="profileUserCancel()"></p-button>
+          <!-- <p-button type="submit" icon="pi pi-danger" label="Cancelar" styleClass="mr-3"></p-button> -->
+        </div>
+
+
+
+      </div>
+
+    </form>
+
+  </div>
+</div>
+
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="50000"
+  rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+
+
+<p-toast></p-toast>

@@ -1,0 +1,98 @@
+<div class="email-container mt-8" style="
+  width: 100%;
+  height: 100%;
+  display: block;
+  padding: 30px;">
+  <div style="max-width: 800px;
+    width: 80%;
+    margin: auto;">
+    <div style="width: 100%;
+        display: flex;
+        justify-content: center;">
+
+    </div>
+
+    <div style="background: white;
+      border-bottom: 2.5px solid #0d47a1;
+      position: relative;
+      overflow: hidden;
+      margin-top: -55px;
+      padding: 70px 40px 40px 40px;
+      border-radius: 5px;
+      box-shadow: 0 4px 8px -3px rgba(17, 17, 17, .1);
+      z-index: 3;">
+      <div style="display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 20px 0;">
+        <h1 style="font-size: 26px;
+          font-weight: 600;
+          color: #464646;">Recuperación de contraseña y habilitación de cuenta <span style="color: #0d47a1;
+            font-weight: 700;"></span></h1>
+      </div>
+
+      <div style="margin: 20px 0;">
+        <p style="margin-bottom: 20px;
+            text-align: center;
+            color: #707070;">Estás recibiendo este mensaje porque hiciste una solicitud de recuperación de contraseña o
+          para volver a habilitar tu cuenta.</p>
+        <p style="margin-bottom: 20px;
+            text-align: center;
+            color: #707070;"><i>Ingrese su número de cédula/RUC: </i></p>
+      </div>
+
+      <div style="text-align: center;">
+        <input [(ngModel)]="recover.identificasion" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+          maxlength="13" type="text" id="identificasion" name="identificasion"
+          style="width: 200px; height: 30px; border: none; border-radius: 10px; box-shadow: 0 0 5px rgba(0,0,0,0.3); background-color: #f0f0f0; padding: 5px; transition: all 0.2s ease-in-out; margin-bottom: 20px;"
+          required>
+      </div>
+
+
+      <div style="display: flex;
+  justify-content: center;">
+
+        <a style="text-decoration: none;margin: 20px 0;
+  display: list-item;
+	background: #0d47a1;
+	font-size: 14px;
+	padding: 5px 15px;
+	cursor: pointer;
+	color: white;
+	border: none;
+	outline: none;
+	transition: all 0.2s ease-out;
+	border-radius: 5px;
+  margin: auto;" (click)="sendEmailRecoverPassword()" id="firstA">Recuperar
+          contraseña</a>
+      </div>
+      <br>
+      <div style="display: flex;
+      justify-content: center;">
+
+        <a style="text-decoration: none;margin: 80px 0;
+      display: list-item;
+        background: #0d47a1;
+        font-size: 14px;
+        padding: 5px 15px;
+        cursor: pointer;
+        color: white;
+        border: none;
+        outline: none;
+        transition: all 0.2s ease-out;
+        border-radius: 5px;
+      margin: auto;" (click)="recoverActivarionAccount()" id="secondA">Solicitud - Habilitar cuenta</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- //Implementacion para la notificsion de los segundos de de astivación -->
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="50000"
+  rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+
+<p-toast></p-toast>
+
+<!--  -->

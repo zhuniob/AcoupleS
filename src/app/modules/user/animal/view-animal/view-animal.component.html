@@ -1,0 +1,440 @@
+<div *ngIf="isLoadingData">
+    <section class="seccion-perfil-animal mb-5">
+        <div class="overlay"></div>
+        <div class="spinner">
+            <div class="lds-roller">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div>Obteniendo todos los animalitos...</div>
+        </div>
+    </section>
+</div>
+
+<div *ngIf="!isLoadingData">
+    <div class="mx-3 mr-3 ">
+        <style>
+            body {
+                margin: 0;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background-color: #f7f7f7;
+            }
+
+            .title {
+                text-align: center;
+                padding: 1rem;
+                background-color: #ffffff;
+                border-radius: 0.5rem;
+                box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.3);
+                margin-top: 3rem;
+                margin-bottom: 3rem;
+                max-width: 80%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .title h4 {
+                font-size: 2.5rem;
+                font-weight: bold;
+                margin: 0;
+                color: #1c1c1c;
+                text-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, 0.1);
+            }
+
+            .title p {
+                font-size: 1.2rem;
+                color: #777777;
+                margin-top: 1rem;
+            }
+
+            .title a {
+                color: #1c1c1c;
+                text-decoration: none;
+                font-weight: bold;
+                transition: all 0.2s ease;
+            }
+
+            .title a:hover {
+                color: #5c5c5c;
+            }
+        </style>
+
+        <div class="title">
+            <h4>SISTEMA DE BÚSQUEDA ANIMALS-C</h4>
+            <p>Encuentra a tu mascota ideal hoy mismo <a routerLink="/sistemAnimalscouple/galerys/animal">Ver
+                    galería</a></p>
+            <p></p>
+        </div>
+
+
+        <div class="row" style="background: transparent;">
+            <div class="col-md-2">
+
+
+                <button class="btn btn-primary w-100 btn2 mb-2 text-start" type="button" (click)="setEnableAll()"
+                    (click)="getFindAllAnimals()">
+                    <i class="fa-solid fa-list fa-fw space" style="margin-right: 10px;"></i>Todo</button>
+
+                <button class="btn btn-primary w-100 btn2 mb-2 text-start" type="button" (click)="setDisable()"
+                    (click)="getAllPreferenceUserDiferentIsLloggin()">
+                    <i class="fa-solid fa-list fa-fw space" style="margin-right: 10px;"></i>Preferencias</button>
+
+                <button class="btn btn-primary w-100 btn2 mb-2 text-start" type="button"
+                    *ngFor="let nomtipo of allTypes" (click)="getRazaAnimalByID(nomtipo.id_tipoanimal)"
+                    (click)="getAllAnimalPerTipo(nomtipo.id_tipoanimal)" (click)="setEnable()"
+                    (click)="setDisabledGender()">
+                    <i class="fa-solid fa-list fa-fw space"
+                        style="margin-right: 10px;"></i>{{nomtipo.nombretipo}}</button>
+            </div>
+
+            <div class="col-md-10" id="productosview">
+
+
+
+                <!-- Primer if -->
+                <div class="all-animals" *ngIf="enableViewAllAnimals == true">
+
+
+                    <div class="grid p-fluid p-fluid d-flex justify-content-center">
+
+                        <div class="col-12 md:col-8">
+                            <span class="p-input-icon-left mb-2 md:mb-0">
+                                <i class="pi pi-search"></i>
+                                <input type="search" pInputText placeholder="Search by name raza, tipo, name animal.."
+                                    (input)="getAllAnimalsPerfilter($event)">
+                            </span>
+                        </div>
+
+                    </div>
+                    <div class="con">
+                        <div class="contenedorLetras">
+                            <span class="tipo">Animal por tipo:</span>
+                            <button class="btn-letra mx-1" *ngIf="i === 0" (click)="getFindAllAnimals()"
+                                [ngClass]="{'active': selectedLetter === 'AC'}">All</button>
+
+                            <ng-container *ngFor="let letter of letter">
+                                <button class="btn-letra"
+                                    [ngClass]="{'letra-m': letter === 'M', 'active': selectedLetter === letter}"
+                                    (click)="findByEstadoAndRaAnimal_RazaAnimal_NombretipoStartingWithIgnoreCase(letter)">
+                                    {{letter}}
+                                </button>
+                            </ng-container>
+                        </div>
+
+                    </div>
+
+                    <div class="card mt-2">
+                        <p-dataView #dv [value]="listALLAnimalsFiltered" [paginator]="true" [rows]="12" filterBy="name"
+                            layout="grid">
+                            <ng-template pTemplate="header">
+                                <div class="flex flex-column md:flex-row md:justify-content-between">
+
+                                    <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+                                    <h3>{{numerFoundCountAnimal}} Animales encontrados.</h3>
+                                </div>
+
+                            </ng-template>
+                            <ng-template let-animal pTemplate="listItem">
+                                <div class="col-12">
+                                    <div class="product-list-item">
+
+                                        <img [src]="animal.foto ? 'data:image/jpeg;base64,' + animal.foto : '../../../../assets/img/fotonull.png'"
+                                            alt="">
+                                        <!-- <img [src]="'data:image/jpeg;base64,' +product.foto" [alt]="product.name" /> -->
+                                        <div class="product-list-detail">
+                                            <div class="product-name">{{animal.nombre}}</div>
+                                            <div class="product-description">{{animal.description}}</div>
+                                            <p-rating [ngModel]="animal.num_soli" [readonly]="true"
+                                                [cancel]="false"></p-rating>
+                                            <i class="pi pi-tag product-category-icon"></i><span
+                                                class="product-category">{{animal.raAnimal.nombreraza}}</span>
+                                        </div>
+                                        <div class="product-list-action">
+                                            <!-- <option value="Efectivo">Solicitar al animal por ${{animal?.preciosolicitud.split('-')[0]}}</option> -->
+                                            <span class="product-price">${{animal.preciosolicitud.split('-')[0]}}</span>
+                                            <p-button icon="pi pi-eye" label="View information"
+                                                (click)="irPerfilAnimalProfile(animal.id_animal)"></p-button>
+
+
+                                            <span
+                                                [ngClass]="{'product-badge': false, 'status-disponible': animal.disponibilidad, 'status-no-disponible': !animal.disponibilidad}">
+                                                {{animal.disponibilidad ? 'DISPONIBLE' : 'NO DISPONIBLE'}}
+                                            </span>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                            <ng-template let-animal pTemplate="gridItem">
+                                <div class="col-12 md:col-4">
+                                    <div class="product-grid-item card"
+                                        [ngStyle]="{'display': animal.persona.id_persona == id_user_person ? 'none' : 'block'}">
+                                        <div class="product-grid-item-top">
+                                            <div>
+                                                <i class="pi pi-tag product-category-icon"></i>
+                                                <span class="product-category">{{animal.raAnimal.nombreraza}}</span>
+
+                                            </div>
+                                            <!-- <span [class]="'product-badge status-'">DESACTIVADO</span> -->
+                                            <span
+                                                [ngClass]="{'product-badge': false, 'status-disponible': animal.disponibilidad, 'status-no-disponible': !animal.disponibilidad}">
+                                                {{animal.disponibilidad ? 'DISPONIBLE' : 'NO DISPONIBLE'}}
+                                            </span>
+                                        </div>
+                                        <div class="product-grid-item-content">
+                                            <img [src]="animal.foto ? 'data:image/jpeg;base64,' + animal.foto : '../../../../assets/img/fotonull.png'"
+                                                alt="" width="200px" height="200px">
+                                            <!-- <img [src]="'data:image/jpeg;base64,' +product.foto" [alt]="product.name" /> -->
+                                            <div class="product-name">{{animal.nombre}}</div>
+                                            <div class="product-description">{{animal.description}}</div>
+                                            <p-rating [ngModel]="animal.num_soli" [readonly]="true"
+                                                [cancel]="false"></p-rating>
+                                        </div>
+                                        <div class="product-grid-item-bottom">
+                                            <span class="product-price">${{animal.preciosolicitud.split('-')[0]}}</span>
+                                            <p-button icon="pi pi-eye"
+                                                (click)="irPerfilAnimalProfile(animal.id_animal)"></p-button>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </p-dataView>
+                    </div>
+                </div>
+
+                <!-- segndo if -->
+                <div class="preferences-user" *ngIf="enableViewPreferences == true">
+
+
+                    <div class="card"> <!-- Inicion de las preferencias, filtros -->
+                        <div *ngIf="isLoadingDataPreferences">
+                            <div class="alert alert-success mb-8 text-center" role="alert" >
+                                ¡Hola {{name_user}} Regálanos un momento estamos cargando tus preferencias!
+                            </div>
+                            
+                            <div class="cs-loader mt-7">
+                                <div class="cs-loader-inner">
+                                    <label>●</label>
+                                    <label>●</label>
+                                    <label>●</label>
+                                    <label>●</label>
+                                    <label>●</label>
+                                    <label>●</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="!isLoadingDataPreferences">
+                            <p-dataView #dv [value]="listaAnimalPreferenceOfPerson" [paginator]="true" [rows]="6"
+                                filterBy="name" layout="grid">
+                                <ng-template pTemplate="header">
+                                    <div class="flex flex-column md:flex-row md:justify-content-between">
+
+                                        <div class="grid p-fluid">
+                                            <div class="col-12 md:col-6">
+                                                <div class="p-inputgroup">
+                                                    <span class="p-inputgroup-addon"><i class="pi pi-users"></i></span>
+                                                    <select pInputText placeholder="Sexo" id="generoSeleccionado"
+                                                        name="generoSeleccionado" required
+                                                        (change)="onTipoAnimalChange($event)">
+                                                        <option value="">Seleccione tipo</option>
+                                                        <option *ngFor="let item of listaTipoPreference"
+                                                            [value]="item[0]">
+                                                            {{ item[1] }}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 md:col-6" >
+                                                <div class="p-inputgroup">
+                                                    <span class="p-inputgroup-addon"><i class="pi pi-users"></i></span>
+                                                    <select pInputText placeholder="Sexo" id="generoSeleccionado"
+                                                        name="generoSeleccionado" required
+                                                        (change)="onRazaAnimalChange($event)">
+                                                        <option value="">Seleccione Raza</option>
+                                                        <option *ngFor="let item of listaRazaPreference"
+                                                            [value]="item[0]">
+                                                            {{ item[1] }}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+                                    </div>
+
+                                </ng-template>
+
+
+                                <ng-template let-animal pTemplate="listItem">
+
+
+
+
+                                    <div class="col-12">
+                                        <div class="product-list-item">
+
+                                            <img [src]="animal.foto ? 'data:image/jpeg;base64,' + animal.foto : '../../../../assets/img/fotonull.png'"
+                                                alt="">
+                                            <!-- <img [src]="'data:image/jpeg;base64,' +product.foto" [alt]="product.name" /> -->
+                                            <div class="product-list-detail">
+                                                <div class="product-name">{{animal.nombre}}</div>
+                                                <div class="product-description">{{animal.description}}</div>
+                                                <p-rating [ngModel]="animal.num_soli" [readonly]="true"
+                                                    [cancel]="false"></p-rating>
+                                                <i class="pi pi-tag product-category-icon"></i><span
+                                                    class="product-category">{{animal.raAnimal.nombreraza}}</span>
+                                            </div>
+                                            <div class="product-list-action">
+                                                <span
+                                                    class="product-price">${{animal.preciosolicitud.split('-')[0]}}</span>
+                                                <p-button icon="pi pi-eye" label="View information"
+                                                    (click)="irPerfilAnimalProfile(animal.id_animal)"></p-button>
+
+
+                                                <!-- <span [class]="'product-badge status-'">DESACTIVADO</span> -->
+                                                <span
+                                                    [ngClass]="{'product-badge': false, 'status-disponible': animal.disponibilidad, 'status-no-disponible': !animal.disponibilidad}">
+                                                    {{animal.disponibilidad ? 'DISPONIBLE' : 'NO DISPONIBLE'}}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </ng-template>
+
+                                <ng-template let-animal pTemplate="gridItem">
+
+                                    <div class="col-12 md:col-4">
+                                        <div class="product-grid-item card">
+                                            <div class="product-grid-item-top">
+                                                <div>
+                                                    <i class="pi pi-tag product-category-icon"></i>
+                                                    <span class="product-category">{{animal.raAnimal.nombreraza}}</span>
+                                                </div>
+
+                                                <span
+                                                    [ngClass]="{'product-badge': false, 'status-disponible': animal.disponibilidad, 'status-no-disponible': !animal.disponibilidad}">
+                                                    {{animal.disponibilidad ? 'DISPONIBLE' : 'NO DISPONIBLE'}}
+                                                </span>
+
+                                            </div>
+                                            <div class="product-grid-item-content">
+                                                <img [src]="animal.foto ? 'data:image/jpeg;base64,' + animal.foto : '../../../../assets/img/fotonull.png'"
+                                                    alt="" width="200px" height="200px">
+
+                                                <div class="product-name">{{animal.nombre}}</div>
+                                                <div class="product-description">{{animal.description}}</div>
+                                                <p-rating [ngModel]="animal.num_soli" [readonly]="true"
+                                                    [cancel]="false"></p-rating>
+                                            </div>
+                                            <div class="product-grid-item-bottom">
+                                                <span
+                                                    class="product-price">${{animal.preciosolicitud.split('-')[0]}}</span>
+                                                <p-button icon="pi pi-eye"
+                                                    (click)="irPerfilAnimalProfile(animal.id_animal)"></p-button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-template>
+
+                            </p-dataView>
+                        </div>
+                    </div> <!--Fin de las preferencias-->
+
+                </div>
+
+                <div class="all-animals-tips" *ngIf="enableViewAllTipos == true">
+                    <!-- Inicio donde vamos hacer par que se gestione por los tipos -->
+                    <div class="card">
+                        <p-dataView #dv [value]="listALLAnimalsFiltered" [paginator]="true" [rows]="6" filterBy="name"
+                            layout="grid">
+                            <ng-template pTemplate="header">
+                                <div class="flex flex-column md:flex-row md:justify-content-between">
+
+
+                                    <p-dropdown [options]="razaAnimal" placeholder="Filtro de razas"
+                                        styleClass="mb-1 md:mb-0"
+                                        (onChange)="filterPerRazaIsSelected($event)"></p-dropdown>
+
+                                    <p-dropdown *ngIf="valuedataGender == true" [options]="sortOptionsAnimalGender"
+                                        placeholder="Filtro genero" styleClass="mb-1 md:mb-4"
+                                        (onChange)="filterGenderAnimalStatus($event)"></p-dropdown>
+                                    <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+                                </div>
+                            </ng-template>
+                            <ng-template let-animal pTemplate="listItem">
+                                <div class="col-12">
+                                    <div class="product-list-item">
+
+                                        <img [src]="animal.foto ? 'data:image/jpeg;base64,' + animal.foto : '../../../../assets/img/fotonull.png'"
+                                            alt="">
+                                        <!-- <img [src]="'data:image/jpeg;base64,' +product.foto" [alt]="product.name" /> -->
+                                        <div class="product-list-detail">
+                                            <div class="product-name">{{animal.nombre}}</div>
+                                            <div class="product-description">{{animal.description}}</div>
+                                            <p-rating [ngModel]="animal.num_soli" [readonly]="true"
+                                                [cancel]="false"></p-rating>
+                                            <i class="pi pi-tag product-category-icon"></i><span
+                                                class="product-category">{{animal.raAnimal.nombreraza}}</span>
+                                        </div>
+                                        <div class="product-list-action">
+                                            <span class="product-price">${{animal.preciosolicitud.split('-')[0]}}</span>
+                                            <p-button icon="pi pi-eye" label="View information"
+                                                (click)="irPerfilAnimalProfile(animal.id_animal)"></p-button>
+                                            <span
+                                                [ngClass]="{'product-badge': false, 'status-disponible': animal.disponibilidad, 'status-no-disponible': !animal.disponibilidad}">
+                                                {{animal.disponibilidad ? 'DISPONIBLE' : 'NO DISPONIBLE'}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                            <ng-template let-animal pTemplate="gridItem">
+                                <div class="col-12 md:col-4">
+                                    <div class="product-grid-item card">
+                                        <div class="product-grid-item-top">
+                                            <div>
+                                                <i class="pi pi-tag product-category-icon"></i>
+                                                <span class="product-category">{{animal.raAnimal.nombreraza}}</span>
+                                            </div>
+
+                                            <span
+                                                [ngClass]="{'product-badge': false, 'status-disponible': animal.disponibilidad, 'status-no-disponible': !animal.disponibilidad}">
+                                                {{animal.disponibilidad ? 'DISPONIBLE' : 'NO DISPONIBLE'}}
+                                            </span>
+                                        </div>
+                                        <div class="product-grid-item-content">
+                                            <img [src]="animal.foto ? 'data:image/jpeg;base64,' + animal.foto : '../../../../assets/img/fotonull.png'"
+                                                alt="" width="200px" height="200px">
+                                            <div class="product-name">{{animal.nombre}}</div>
+                                            <div class="product-description">{{animal.description}}</div>
+                                            <p-rating [ngModel]="animal.num_soli" [readonly]="true"
+                                                [cancel]="false"></p-rating>
+                                        </div>
+                                        <div class="product-grid-item-bottom">
+                                            <span class="product-price">${{animal.preciosolicitud.split('-')[0]}}</span>
+                                            <p-button icon="pi pi-eye"
+                                                (click)="irPerfilAnimalProfile(animal.id_animal)"></p-button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </p-dataView>
+                    </div>
+                    <!-- Fin por donde vamos hacer para que  valga el tipo -->
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

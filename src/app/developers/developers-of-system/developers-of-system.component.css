@@ -1,0 +1,61 @@
+/* .fondo {
+  background-image: url('https://static.vecteezy.com/system/resources/previews/000/180/409/original/software-engineers-vector.png');
+  background-color: bisque;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100%;
+  opacity: 0.2;
+}
+
+.contenido {
+  min-height: 100%;
+} */
+
+#equipo {
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem 1rem;
+    /* space-between provocaría que los círculos queden alineados a la derecha en la 2a línea */
+    justify-content: space-around;
+    align-items: flex-start;
+    backdrop-filter: blur(3px);
+    background-color: transparent;
+    border: 3px solid #dfdfdf;
+    box-shadow: 30px 30px 35px rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+  }
+  .caja-circular {
+      padding: 1 9px 50px;
+      max-width: 150px;
+  }
+  .caja-circular img {
+      box-shadow: 7px 7px 5px #888888;
+      border-radius: 20%;
+      margin: 0 auto;
+        display:block;
+    /* la altura y anchura de la img están determiandas por la capa .cont- */ 
+      width: 80%;
+      height: auto;
+  }
+  .caja-circular div	{margin: 0 auto 20px; display: block;}
+  
+  
+  .txt-pie-img	{text-align: center;}
+  
+  /* Se aplica a todas las que empiezan con cont- */
+  [class*="cont-"] {
+    position: relative;
+    width: 130px;
+    height: 130px;
+  }
+  
+  /* Caja 3: 'Newton'. Efecto hover simple con efecto filter */
+  .cont-3:hover img {
+      filter: brightness(50%);
+  }
+
+
+

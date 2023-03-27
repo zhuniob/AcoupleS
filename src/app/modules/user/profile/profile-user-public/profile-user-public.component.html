@@ -1,0 +1,104 @@
+<section class="seccion-perfil-usuariop mb-5">
+    <div class="perfil-usuariop-header">
+        <div class="perfil-usuariop-portada">
+            <div align="right">
+                <p style="font-family: cursive ; font-size: 250%; color: black; ">
+                    <img src="../../assets/img/logo.png" alt="" width="250px" height="250px">
+
+                </p>
+            </div>
+            <div class="perfil-usuariop-avatar">
+                <img [src]="personas.foto ? 'data:image/jpeg;base64,' +personas.foto : '../../../../assets/img/fotonull.png'"
+                    alt="img-avatar" height="166px">
+
+            </div>
+
+        </div>
+    </div>
+    <div class="perfil-usuariop-body">
+
+        <div class="perfil-usuariop-bio">
+            <h3 class="nombre"></h3>
+            <p class="texto" style="font-size: 15px;">Hola, mi nombre es {{personas.nombres}} y me complace presentarte a mis adorables animales. Espero que puedas encontrar uno de tu agrado y no dudes en contactarte conmigo. </p>
+        </div>
+        <div class="perfil-usuariop-footer">
+
+
+            <div class="perfil-usuariop-footer">
+
+
+                <ul class="lista-datos">
+                    <li><i class="icono fa-solid fa-user"></i>Nombre:{{personas.nombres}} </li>
+                    <li><i class="icono fa-solid fa-venus-mars"></i>Género: {{personas.genero}} </li>
+                    <li><i class="icono fa-solid fa-calendar-days"></i>Edad: {{personas.edad}} </li>
+
+                </ul>
+
+                <ul class="lista-datos">
+                    <li><i class="icono fa-solid fa-folder"></i>Correo: {{personas.correo}} </li>
+                    <li><i class="icono fa-solid fa-phone"></i>Celular: {{personas.celular}} </li>
+                    <li><i class="icono fa-solid fa-phone"></i>Teléfono: {{personas.telefono}} </li>
+
+                </ul>
+
+            </div>
+
+
+
+        </div>
+    </div>
+
+    <br>
+    <br>
+
+
+
+
+</section>
+
+
+<div class="surface-ground px-4 py-5 md:px-6 lg:px-8">
+    <div class="grid">
+        <div class="col-12 md:col-6 lg:col-4" *ngFor="let dat of listALLAnimals">
+            <div class="surface-card shadow-2 p-3 border-round">
+                <div class="flex justify-content-between mb-3">
+                    <div>
+                        <div>
+                            <i class="pi pi-tag product-category-icon"></i>
+                            <span class="product-category">{{dat.raAnimal.nombreraza}}</span>
+                        </div>
+                    </div>
+                    <div class="flex align-items-center justify-content-center bg-blue-100 border-round"
+                        style="width:2.5rem;height:2.5rem">
+                        <i class="pi pi-eye text-blue-500 text-xl" (click)="irPerfilAnimalProfile(dat.id_animal)"></i>
+                    </div>
+                </div>
+                <div class="flex justify-content-between mb-1">
+                    <div class="flex align-items-center">              
+                        <img [src]="dat.foto ? 'data:image/jpeg;base64,' + dat.foto : '../../../../assets/img/fotonull.png'"
+                            alt="" width="100px" height="100px">
+                        <div class="ml-3">
+                            <span class="text-500">Animalito: </span>
+                            <span class="product-category">{{dat.nombre}}</span><br>
+                            <span class="text-500">Género: </span>
+                            <span class="product-category">{{dat.genero}}</span><br>
+                            <span class="text-500">Precio $: </span>
+                            <span class="product-category">{{dat.preciosolicitud}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-content-between mb-1">
+                    <div>
+
+                        <span class="text-green-500 font-medium">{{dat.edad}}</span>
+                        <span class="text-500"> Años</span>
+                    </div>
+                    <div class="flex align-items-center justify-content-center">
+                        <p-rating [ngModel]="dat.num_soli" [readonly]="true" [cancel]="false"></p-rating>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

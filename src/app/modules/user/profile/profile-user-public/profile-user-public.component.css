@@ -1,0 +1,441 @@
+
+    .seccion-perfil-usuariop .perfil-usuariop-body,
+    .seccion-perfil-usuariop {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .seccion-perfil-usuariop .perfil-usuariop-header {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        background: linear-gradient(#B873FF, transparent);
+        margin-bottom: 1.25rem;
+    }
+    
+    .seccion-perfil-usuariop .perfil-usuariop-portada {
+        display: block;
+        position: relative;
+        width: 90%;
+        background-image: url('../../../../../assets/img/login/mishi-perro.jpg');
+        background-repeat: no-repeat;
+        height: 17rem;
+        background-position: center;
+        background-size: cover;
+        border-radius: 0 0 20px 20px;
+
+    }
+    
+    .seccion-perfil-usuariop .perfil-usuariop-portada .boton-portada {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        border: 0;
+        border-radius: 8px;
+        padding: 12px 25px;
+        background-color: rgba(0, 0, 0, .5);
+        color: #fff;
+        cursor: pointer;
+    }
+    
+    .seccion-perfil-usuariop .perfil-usuariop-portada .boton-portada i {
+        margin-right: 1rem;
+    }
+    
+    .seccion-perfil-usuariop .perfil-usuariop-avatar {
+        display: flex;
+        width: 180px;
+        height: 180px;
+        align-items: center;
+        justify-content: center;
+        border: 7px solid #FFFFFF;
+        background-color: #DFE5F2;
+        border-radius: 50%;
+        box-shadow: 0 0 12px rgba(0, 0, 0, .2);
+        position: absolute;
+        bottom: -40px;
+        left: calc(50% - 90px);
+        z-index: 1;
+    }
+    
+    .seccion-perfil-usuariop .perfil-usuariop-avatar img {
+        width: 100%;
+        position: relative;
+        border-radius: 50%;
+    }
+    
+    .seccion-perfil-usuariop .perfil-usuariop-avatar .boton-avatar {
+    
+        position: absolute;
+        right: -2px;
+        bottom: -2px;
+        border: 0;
+        background-color: #fff;
+        box-shadow: 0 0 12px rgba(0, 0, 0, .2);
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+    
+    .seccion-perfil-usuariop .perfil-usuariop-body {
+        width: 70%;
+        position: relative;
+        max-width: 950px;
+    }
+    
+    .seccion-perfil-usuariop .perfil-usuariop-body .nombre {
+        display: block;
+        width: 100%;
+        font-size: 1.75em;
+        margin-bottom: 0.5rem;
+    }
+    
+    .seccion-perfil-usuariop .perfil-usuariop-body .texto {
+        color: #848484;
+        font-size: 0.95em;
+    }
+    
+    .seccion-perfil-usuariop .perfil-usuariop-footer,
+    .seccion-perfil-usuariop .perfil-usuariop-bio {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 1.5rem 2rem;
+        box-shadow: 0 0 12px rgba(0, 0, 0, .2);
+        background-color: #fff;
+        border-radius: 15px;
+        width: 100%;
+        box-shadow: 30px 30px 35px rgba(0, 0, 0, 0.5);
+    }
+    
+    .seccion-perfil-usuariop .perfil-usuariop-bio {
+        margin-bottom: 1.25rem;
+        text-align: center;
+    }
+    
+    .seccion-perfil-usuariop .lista-datos {
+        width: 50%;
+        list-style: none;
+    }
+    
+    .seccion-perfil-usuariop .lista-datos li {
+        padding: 7px 0;
+    }
+    
+    .seccion-perfil-usuariop .lista-datos li>.icono {
+        margin-right: 2rem;
+        align-items: baseline;
+        font-size: 1.5rem;
+        vertical-align: middle;
+    
+    }
+    
+    .seccion-perfil-usuariop .redes-sociales {
+        position: absolute;
+        right: calc(0px - 50px - 1rem);
+        top: 0;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .seccion-perfil-usuariop .redes-sociales .boton-redes {
+        border: 0;
+        background-color: #fff;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        color: #fff;
+        box-shadow: 0 0 12px rgba(0, 0, 0, .2);
+        font-size: 1.3rem;
+    }
+    
+    .seccion-perfil-usuariop .redes-sociales .boton-redes+.boton-redes {
+        margin-top: .5rem;
+    }
+    
+    .seccion-perfil-usuariop .boton-redes.facebook {
+        background-color: #5955FF;
+    }
+    
+    .seccion-perfil-usuariop .boton-redes.twitter {
+        background-color: #35E1BF;
+    }
+    
+    .seccion-perfil-usuariop .boton-redes.instagram {
+        background: linear-gradient(45deg, #FF2DFD, #40A7FF);
+    }
+    
+    /* adactacion a dispositivos */
+    @media (max-width: 750px) {
+        .seccion-perfil-usuariop .lista-datos {
+            width: 100%;
+        }
+    
+        .seccion-perfil-usuariop .perfil-usuariop-portada,
+        .seccion-perfil-usuariop .perfil-usuariop-body {
+            width: 95%;
+        }
+    
+        .seccion-perfil-usuariop .redes-sociales {
+            position: relative;
+            flex-direction: row;
+            width: 100%;
+            left: 0;
+            text-align: center;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            align-items: center;
+            justify-content: center
+        }
+    
+        .seccion-perfil-usuariop .redes-sociales .boton-redes+.boton-redes {
+            margin-left: 1rem;
+            margin-top: 0;
+        }
+    }
+    
+    .perfil-usuariop-footer {
+        position: relative;
+    }
+    
+    .perfil-usuariop-footer .btns {
+    
+        position: absolute;
+        top: 3%;
+        right: 0;
+        margin-left: 90%;
+        float: right;
+    
+        width: 45px;
+        height: 45px;
+        background-color: transparent;
+    
+    }
+    
+    
+    .btns {
+        font-size: 20px;
+        cursor: pointer;
+    
+        color: black;
+        border-radius: 50%;
+    
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5em;
+    }
+    
+    /* Estilos para los pasos de los botones a las diferentes apartados de lo que se va */
+    
+    
+    .container {
+        display: flex;
+    }
+    
+    .button-container {
+        position: relative;
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    button {
+        background-color: transparent;
+        border: none;
+        font-size: 1.2em;
+        text-align: center;
+        cursor: pointer;
+    }
+    
+    .line {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 2px;
+        background-color: rgb(30, 29, 63);
+        transition: all 0.2s ease-in-out;
+    }
+    
+    button:hover+.line {
+        width: 100%;
+    }
+    
+    
+    /* Implementacion de la parte de el floating */
+    
+    .img-container {
+        position: relative;
+    }
+    
+    .img-container img {
+        border-radius: 4%;
+    }
+    
+    
+    .imagen1 {
+        transition: all 0.3s ease-in-out;
+    }
+    
+    .imagen1:hover {
+        transform: scale(1.040);
+ 
+    }
+    
+    
+    /* Implementación de codigo par qel diseño del titulo */
+    
+    .modelo-service {
+        font-size: 30px;
+    }
+    
+    /* Implementacion del hover para el nombre de servicio */
+    
+    .contenidoService h1:hover {
+        color: rgb(29, 33, 43);
+        background-color: #848484;
+    }
+    
+    /* Implementacion de los colores para que se cambien los colores de los compos */
+    /* Para el icono redondeaod */
+    .p-inputgroup .icon-container {
+        position: relative;
+        border-radius: inherit;
+      }
+      
+      .p-inputgroup .icon {
+        position: absolute;
+        top: 17px;
+        right: 10px;
+        color: red;
+      }
+      
+      .p-inputgroup input {
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+      }
+    
+    
+      /* Implementacion para las razas */
+    
+      .conta{
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        flex-flow: wrap; 
+      }
+    
+    
+      /*  */
+      .perfil-usuariop-footer .btnspre {
+    
+        position: absolute;
+        top: 3%;
+        right: 0;
+        margin-left: 90%;
+        float: right;
+    
+        width: 45px;
+        height: 45px;
+        background-color: transparent;
+    
+    }
+    
+    
+    .btnspre {
+        font-size: 20px;
+        cursor: pointer;
+    
+        color: black;
+        border-radius: 50%;
+    
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5em;
+    }
+    
+    
+    /* Nurvo para the preferences */
+    
+    .col-container {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      
+    
+    .work-item{
+        margin:15px;
+        padding:10px;
+        min-height:60px;
+        min-width:100px;
+        overflow:hidden;
+        position:relative;
+        box-shadow:0 2px 10px 0 rgba(0,0,0,.16),0 2px 5px 0 rgba(0,0,0,.26);
+    }
+    
+    .work-item a:before{
+        top:15px;
+        z-index:1;
+        left:-20px;
+        color:#fff;
+        padding:0 4px;
+        min-width:88px;
+        font-size:12px;
+        position:absolute;
+        white-space:nowrap;
+        text-align:center;
+        content:attr(data-type);
+        background-color:#BA68C8;
+        transition:all .4s ease-in-out 0s;
+        transform:rotate(-45deg) rotateX(90deg);
+    }
+    .work-item .more{
+        padding-bottom: 10%;
+        top:50%;
+        left:50%;
+        color:#fff;
+        width:30px;
+        height:0px;
+        margin-top:-20px;
+        margin-left:-15px;
+        line-height:30px;
+        position:absolute;
+        border-radius:50%;
+        text-align:center;
+        background-color:#42ad42;
+        transition:all .4s ease-in-out 0s;
+    }
+    .work-item .title{
+        left:0;
+        right:0;
+        bottom:0;
+        width:100%;
+        padding:5px;
+        font-size:13px;
+        position:absolute;
+        text-align:center;
+        transition:all .4s ease-in-out 0s;
+    }
+    .work-item:hover a:before{
+        transform:rotate(-45deg);
+    }
+    .work-item:hover .title{
+        color:#fff;
+        font-size:10px;
+        text-transform:uppercase;
+        transform:translateY(-20px);
+    }
+    .work-item:hover .more{
+        color:transparent;
+        transform:scale(7);
+    }

@@ -1,0 +1,133 @@
+<nav class="navbar bg-body-tertiary fixedtop sticky-top px-4">
+    <div class="container-fluid">
+
+        <a class="navbar-brand">
+            <div class="logo-container" routerLink="/welcome">
+                <img class="logo" src="../../../assets/img/logo.png" alt="Logo" />
+                <h1 *ngIf="id_usuarioAccount == null" class="brand-name">AnimalsCouple</h1>
+            </div>
+        </a>
+
+        <a class="navbar-brand notification-container" *ngIf="id_usuarioAccount != null" style="margin-top: 15px;">
+            <i class="pi pi-comments mx-2" style="font-size: 1.5rem" (click)="routerChatUser()"></i>
+            <i class="pi pi-bell" style="font-size: 1.5rem" (click)="openmodal()"></i>
+            <span class="notification-number">{{numsolicitudes}}</span>
+
+        </a>
+
+        <button *ngIf="id_usuarioAccount != null" class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!--Segundo btn  -->
+        <button *ngIf="id_usuarioAccount == null" class="login-btn" routerLink="/login">
+            <i class="fas fa-sign-in-alt"></i>
+            Iniciar sesión
+        </button>
+
+        <div class="offcanvas offcanvas-end " tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+
+            <div class="offcanvas-header">
+                <h3 class="m-0">
+                    AnimalsCouple
+                </h3>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+
+            </div>
+            <header id="header">
+                <div class="d-flex flex-column">
+                    <div class="profile">
+                        <img [src]="'data:image/jpeg;base64,' + dataUser?.persona?.foto" alt=""
+                            class="img-fluid rounded-circle">
+                        <h1 class="text-light"><a style="color: black;">{{dataUser?.usuario}}</a></h1>
+
+                    </div>
+
+                </div>
+            </header>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+
+                    <li class="nav-item">
+                        <a class="nav-link active" data-bs-dismiss="offcanvas" aria-current="page" routerLink="home"> <i
+                                class="pi pi-home"></i><Span></Span> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-dismiss="offcanvas" *ngIf="isUserNormal == true"
+                            routerLink="usuario/perfil"><i class="pi pi-id-card"></i><Span></Span> Perfil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-dismiss="offcanvas" *ngIf="isUserNormal == true"
+                            routerLink="catalogo/animales"> <i class="pi pi-table"></i><Span></Span> Catálogo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-dismiss="offcanvas" *ngIf="isUserNormal == true"
+                            routerLink="solicitud"> <i class="pi pi-inbox"></i><Span></Span> Solicitudes</a>
+                    </li>
+
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false" *ngIf="isUserAdmin == true"><i
+                                class="pi pi-user-edit"></i><Span></Span>
+                            Gestión de Usuarios
+                        </a>
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false" *ngIf="isUserNormal == true"><i class="pi pi-folder"></i><Span></Span>
+                            Gestionar mis Animales
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" data-bs-dismiss="offcanvas" *ngIf="isUserNormal == true" routerLink="register-animal"><i
+                                        class="pi pi-folder"></i><Span></Span>
+                                    Registro Animales</a></li>
+                            <li><a class="dropdown-item" data-bs-dismiss="offcanvas" *ngIf="isUserNormal == true"
+                                    routerLink="sistemAnimalscouple/galerys/animal"><i
+                                        class="pi pi-images"></i><Span></Span>
+                                    Galeria</a></li>
+                            <li><a class="dropdown-item" data-bs-dismiss="offcanvas" *ngIf="isUserAdmin == true" routerLink="list/users"><i
+                                        class="pi pi-users"></i><Span></Span>
+                                    Listas de usuarios</a></li>
+                            <li><a class="dropdown-item" data-bs-dismiss="offcanvas" *ngIf="isUserAdmin == true"
+                                    routerLink="admin/list/users/activate"><i class="pi pi-id-card"></i><Span></Span>
+                                    Cuentas</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown" *ngIf="isUserAdmin == true">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false" *ngIf="isUserAdmin == true"><i
+                                class="pi pi-folder-open"></i><Span></Span>
+                            Gestión de Animales
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" data-bs-dismiss="offcanvas" *ngIf="isUserAdmin == true"
+                                    routerLink="register-raza-animal"><i class="pi pi-folder"></i><Span></Span> Razas de
+                                    animales</a></li>
+                            <li><a class="dropdown-item" data-bs-dismiss="offcanvas" *ngIf="isUserAdmin == true"
+                                    routerLink="register-tipo-animal"><i class="pi pi-folder"></i><Span></Span> Tipos de
+                                    animales</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" data-bs-dismiss="offcanvas" aria-current="page" routerLink="login" (click)="signOut()"> <i
+                                class="pi pi-sign-out"></i><Span></Span> Cerrar Sesión.</a>
+                    </li>
+
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+</nav>
+<div class="mx-20" *ngIf="modal==true">
+    <!-- <div  routerLink="login" ></div> -->
+    <app-notificacion></app-notificacion>
+</div>
+
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="50000"
+    rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+
+<p-toast></p-toast>

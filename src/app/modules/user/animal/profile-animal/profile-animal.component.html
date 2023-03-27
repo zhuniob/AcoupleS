@@ -1,0 +1,140 @@
+
+<div *ngIf="isLoadingData">
+    <section class="seccion-perfil-animal mb-5">
+        <div class="overlay"></div>
+        <div class="spinner">
+            <div class="lds-roller">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div>Obteniendo datos de animalito...</div>
+        </div>
+    </section>
+</div>
+<div *ngIf="!isLoadingData">
+    <section class="seccion-perfil-animal mb-5">
+        <div class="perfil-animal-header">
+            <div class="perfil-animal-portada">
+                <div align="right">
+                    <p style="font-family: cursive ; font-size: 250%; color: black; ">
+                        <img src="../../assets/img/logo.png" alt="" width="250px" height="250px">
+                    </p>
+                </div>
+                <div class="perfil-animal-avatar">
+                    <img [src]="animal.foto ? 'data:image/jpeg;base64,' +animal.foto : '../../../../assets/img/fotonull.png'"
+                        alt="img-avatar" height="165px">
+                    <input type="file" #fileInput style="display: none;" accept="image/jpeg, image/jpg, image/png"
+                        (change)="($event)">
+                </div>
+            </div>
+        </div>
+        <div class="perfil-animal-body">
+            <div class="perfil-animal-bio">
+                <h3 class="nombre"></h3>
+                <p style="font-family: cursive ; font-size: 100%; color: rgb(0, 0, 0); ">
+                    Cada emparejamiento puede ir mejorando la genética para así lograr tener un espécimen ideal
+                </p>
+            </div>
+            <div class="perfil-animal-footer">
+                <div class="perfil-animal-footer">
+                    <ul class="lista-datos">
+                        <li><i class="icono fas fa-paw"></i>Nombre: {{animal.nombre}} </li>
+                        <li><i class="icono fas fa-tint"></i>Color: {{animal.color}} </li>
+                        <li><i class="icono fa-solid fa-venus-mars"></i>Género: {{animal.genero}} </li>
+                        <li><i class="icono fa-solid fa-calendar-days"></i>Edad: {{animal.edad}} </li>
+                        <li><i class="icono fa-solid fa-weight-scale"></i>Peso: {{animal.peso}} </li>
+                        <li><i class="icono fa-solid fa-earth-americas"></i>Raza: {{animal.raAnimal?.nombreraza}} </li>
+                        <li><i class="icono fa-solid fa-user"></i>Dueño:
+                            {{animal.persona?.nombres}} <i class="icono fa-solid fa-location-arrow"
+                                (click)="perfildePersona(animal.persona?.id_persona)" style="cursor: pointer; margin-left: 10px;"></i>
+                        </li>
+                        <!-- <li><i class="icono fa-solid fa-user"
+                                (click)="perfildePersona(animal.persona?.id_persona)"></i>Dueño:
+                            {{animal.persona?.nombres}}
+                        </li> -->
+                    </ul>
+                </div>
+                <button type="button" class="btn" (click)="mostrarPDF()">Mostrar Ficha Médica</button>
+                <button type="button" *ngIf="animal.disponibilidad == false" class="btn" style="background-color: red;"
+                    (click)="showMessageViewNodisponible()">No disponible</button>
+                <button type="button" *ngIf="animal.disponibilidad == true" class="btn"
+                    (click)="showModalDialog()">Solicitar</button>
+            </div>
+        </div>
+    </section>
+</div>
+<p-dialog [(visible)]="displayModal" [modal]="true" [style]="{width: '65vh'}" [draggable]="false" [resizable]="false"
+    class="pdi">
+    <div class="">
+        <div class="product-grid-item card" style="align-items: center;">
+            <section class="cantact_info">
+                <section class="info_title" style="margin-top: .7em;">
+                    <h2>FORMULARIO DE SOLICITUD</h2>
+                </section>
+                <section style="margin: 1em 0 1em 0;" class="info_items">
+                <!-- <section style="margin: -1em 0 1em 0;" class="info_items"> -->
+                    <div class="product-grid-item card">
+                        <div class="product-grid-item card" style="background: #4090ec3a; padding: 1em;">
+                            <div class="product-grid-item-top">
+                                <div style="margin: .3em;">
+                                    <i class="pi pi-tag product-category-icon"></i>
+                                    <span class="product-category"> {{animal.nombre}}</span>
+                                </div>
+                            </div>
+                            <div class="product-grid-item-content">
+                                <img [src]="animal.foto ? 'data:image/jpeg;base64,' + animal.foto : '../../../../assets/img/fotonull.png'"
+                                    alt="" width="150px" height="150px" style="border-radius: 6px;">
+                                <div style="display: flex;
+                                    justify-content: center;
+                                    align-items: center;">
+                                    <p-rating [ngModel]="animal.num_soli" [readonly]="true" [cancel]="false"
+                                        style="margin:.5em"></p-rating>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </section>
+            <form FormGroup="form" style="border: none;" ngNativeValidate>
+                <div class="form_footer">
+                    <div class="p-fluid" style="padding: 1em;">
+                        <div class="mb-4">
+                            <label for="categoria" style="margin: .3em 0 .7em 0;">Método de pago</label>
+                            <select (change)="onRazaAnimalChange($event)" class="form-select" name="categoria" required >
+                                <option [defaultSelected]>Tipo de pago: </option>
+                                <option value="Efectivo">Solicitar al animal por
+                                    ${{animal?.preciosolicitud.split('-')[0]}}</option>
+                                <option value="Trueque">Solicitar al animal a cambio de
+                                    {{animal?.preciosolicitud.split('-')[1]}} cria/s.</option>
+                            </select>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label" for="textarea" style="margin: .3em 0 .7em 0;">Comentario:</label>
+                            <textarea class="form-control" inputId="textarea" rows="3" style="resize: none;" cols="30"
+                                pInputTextarea required id="txtAreaComentario" [(ngModel)]="solicitud.comentario"
+                                name="comentario"></textarea>
+                        </div>
+                        <div class="flex_container">
+                            <p-button class="btn_form_soliciutd" icon="pi pi-times" label="Cancelar"
+                                (click)="unShowModalDialog()"></p-button><br>
+                            <p-button class="btn_form_soliciutd" icon="pi pi-send" label="Enviar"
+                                (click)="showSwal()"></p-button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</p-dialog>
+
+<!-- fin    >   formulario de envio de solicitud -->
+
+
+
+<p-toast></p-toast>

@@ -1,0 +1,68 @@
+<body *ngIf="isUserNormal == true">
+    <section>
+        <main>
+            <header>
+                <div class="icon">
+                    <div class="lines">
+                        <div class="top line"></div>
+                        <div class="bottom line"></div>
+                    </div>
+                    <div class="circle"></div>
+                </div>
+                <h2>Solicitudes</h2>
+                <div class="search">
+                    <i (click)="closemodal()" class="pi pi-times"></i>
+                </div>
+            </header>
+            <div class="content" style="width:100%; overflow:auto; max-height:420px; min-height:420px;">
+
+                <div #messagesContainer>
+
+                    <div class="solicitud-box" *ngFor="let s of solicitudes">
+                        <div class="solicitud-header">
+                            <img [src]="s.persona.foto ? 'data:image/jpeg;base64,' +s.persona.foto : '../../../../assets/img/fotonull.png'"
+                                alt="img-avatar" height="50px" width="50px">
+                            <div class="solicitud-header-info">
+                                <p class="solicitud-header-name">{{ s.persona.nombres }}</p>
+                                <p class="solicitud-header-time">{{ s.fecha | date: 'short' }}</p>
+                            </div>
+                        </div>
+                       
+                        <div class="solicitud-content">
+                            <p>{{s.comentario}}</p>
+                            <div class="image-text-wrapper">
+                                <div class="image-wrapper">
+                                    <img [src]="s.animal.foto ? 'data:image/jpeg;base64,' +s.animal.foto : '../../../../assets/img/fotonull.png'"
+                                        alt="img-animal" height="50px" width="80px">
+                                </div>
+                                <div class="text-wrapper">
+                                    <h6 class="tipo-pago">Quiero alquilar a: <strong> {{s.animal.nombre}} </strong></h6>
+                                    <h6 class="tipo-pago">A cambio de: <strong>{{s.tipopago}}</strong></h6>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="solicitud-footer">
+                            <button pButton pRipple type="button" icon="pi pi-user"
+                                class="p-button-rounded p-button-info p-button-text"
+                                (click)="redirectToProfileUser(s.persona.id_persona)"></button>
+                            <button (click)="updateSolicitudperId(s.id_solicitud, s, 1, s.animal)" pButton pRipple
+                                type="button" icon="pi pi-check"
+                                class="p-button-rounded p-button-success p-button-text"></button>
+                            <button (click)="updateSolicitudperId(s.id_solicitud, s, 2, null)" pButton pRipple
+                                type="button" icon="pi pi-times"
+                                class="p-button-rounded p-button-danger p-button-text"></button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+
+
+    </section>
+
+</body>

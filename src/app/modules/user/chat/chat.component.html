@@ -1,0 +1,270 @@
+<!-- <div class="container-fluid mt-3 rounded mb-3" style="box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);"> -->
+<div class="container-fluid rounded " style="box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5); padding: 10px;">
+
+    <div class="row rounded" style="box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);">
+        <div class="col-md-4 ">
+            <div class="chat-user-list-panel rounded" style="box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);">
+                <div class="add-group-btn justify-space-between">
+                    <h4>Chat</h4>
+                    <a class="open-grp"><i class="fa fa-plus" aria-hidden="true"
+                            (click)="goITnewPersonMessage()"></i></a>
+                </div>
+                <ul class="chat-list">
+                    <li *ngFor="let chat of chats" (click)="cargarChat(chat)"
+                        [class.active]="chatActual?.id_chat === chat.id_chat">
+                        <a>
+                            <ul class="chat-detail">
+
+                                <li>
+                                    <div class="chat-profile-user">
+
+                                        <img [src]="chat.persona_emisor.id_persona == id_personaIsLoggin ? 'data:image/jpeg;base64,' + chat.persona_receptor.foto : chat.persona_emisor.foto"
+                                            alt="" width="50px" height="50px" class="rounded-circle mb-3"
+                                            *ngIf="chat.persona_emisor.id_persona == id_personaIsLoggin || chat.persona_receptor.id_persona == id_personaIsLoggin && !chat.persona_emisor.foto">
+
+                                        <img [src]="chat.persona_receptor.id_persona == id_personaIsLoggin ? 'data:image/jpeg;base64,' + chat.persona_emisor.foto : chat.persona_receptor.foto"
+                                            alt="" width="50px" height="50px" class="rounded-circle mb-3"
+                                            *ngIf="chat.persona_receptor.id_persona == id_personaIsLoggin || chat.persona_emisor.id_persona == id_personaIsLoggin && !chat.persona_receptor.foto">
+
+                                    </div>
+
+                                </li>
+
+                                <li>
+                                    <div class="chat-user-nm">{{ chat.persona_emisor.id_persona == id_personaIsLoggin ?
+                                        chat.persona_receptor.nombres :
+                                        chat.persona_emisor.nombres }}</div>
+                                    <!-- <div class="chat-desc">Combination of neutral colors</div>-->
+                                </li>
+                                <li>
+                                    <!--<div class="chat-seen">15 Min Ago</div> -->
+                                    <!-- <div class="not-read-lable">10</div> -->
+                                </li>
+                            </ul>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="code-container">
+
+                <div id="chat" class="chat rounded" style="box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);">
+                    <div class="conversation">
+                        <div class="head">
+                            <div class="person avatar">
+                                <img [src]="personaReceptor1.foto ? 'data:image/jpeg;base64,'+ personaReceptor1.foto : '../../../../assets/img/i.svg'"
+                                    alt="" width="55px" height="55px" class="img-perfil">
+                                <div class="online"></div>
+                            </div>
+                            <h3 class="person-name">{{personaReceptor1.nombres}}</h3>
+                            <div class="buttons">
+                                <svg (click)="showInfo('Esta funcionalidad esta en desarrollo')" title="Call"
+                                    class="audio-call icon" stroke="currentColor" fill="none" stroke-width="2"
+                                    viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1.25em"
+                                    width="1.25em" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                                    </path>
+                                </svg>
+                                <svg (click)="showInfo('Esta funcionalidad esta en desarrollo')" title="Video-call"
+                                    class="video-call icon" stroke="currentColor" fill="none" stroke-width="2"
+                                    viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1.25em"
+                                    width="1.25em" xmlns="http://www.w3.org/2000/svg">
+                                    <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                                    <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                                </svg>
+                                <svg id="button-options" class="button-option icon" stroke="currentColor" fill="none"
+                                    stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"
+                                    height="1.25em" width="1.25em" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                </svg>
+                            </div>
+                        </div>
+
+
+                        <div #messagesContainer style="width:100%; overflow:auto; max-height:420px; min-height:420px;">
+                            <div id="messages" class="messages">
+
+
+                                <div class="time">Today</div>
+
+                                <div class="d" *ngFor="let mensaje of mensajes; let last = last">
+                                    <div class="msg-text"
+                                        [ngClass]="mensaje.persona.id_persona == id_personaIsLoggin ? 'owner': ''">
+                                        <span class="text">{{ mensaje.texto }} <small class="text-muted small-text">{{
+                                                mensaje.fecha |
+                                                date:'shortTime' }}</small></span>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <svg class="emoji icon" stroke="currentColor" fill="none" stroke-width="0"
+                                viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                </path>
+                            </svg>
+
+                            <!-- Identificasion del input -->
+
+                            <input id="mensaje" name="mensaje" required class="input-message"
+                                [(ngModel)]="mensaje.texto" (keydown)="onEnter($event)" type="text"
+                                placeholder="Type something..." />
+                            <div class="icon plus">
+                                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"
+                                    stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div class="icon send text" (click)="createMensaje()">
+
+                                <!-- //Encargado de enviar -->
+                                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"
+                                    stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                                </svg>
+                            </div>
+                            <div id="send-audio" class="icon send audio">
+                                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"
+                                    stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                                    <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                                    <line x1="12" y1="19" x2="12" y2="23"></line>
+                                    <line x1="8" y1="23" x2="16" y2="23"></line>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="options" class="options">
+                        <div class="head">
+                            <div id="close-options" class="close icon">
+                                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"
+                                    stroke-linecap="round" stroke-linejoin="round" height="2em" width="2em"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                                    <polyline points="12 19 5 12 12 5"></polyline>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="info">
+                            <div class="person photo">
+                                <img [src]="personaReceptor1.foto ? 'data:image/jpeg;base64,'+ personaReceptor1.foto : '../../../../assets/img/i.svg'"
+                                    alt="" width="100px" height="100px" style="border-radius: 80px;">
+                                <div class="online"></div>
+                            </div>
+                            <h2 class="name">{{personaReceptor1.nombres}}</h2>
+                            <div class="buttons">
+                                <div class="button">
+                                    <div class="icon" (click)="showInfo('Esta funcionalidad esta en desarrollo')">
+                                        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"
+                                            stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                    <p class="title">Audio</p>
+                                </div>
+                                <div class="button">
+                                    <div class="icon" (click)="showInfo('Esta funcionalidad esta en desarrollo')">
+                                        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"
+                                            stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                                            <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                                        </svg>
+                                    </div>
+                                    <p class="title">Video</p>
+                                </div>
+                                <div class="button" (click)="redirectToProfileUser(personaReceptor1.id_persona)">
+                                    <div class="icon">
+                                        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"
+                                            stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                            <circle cx="12" cy="7" r="4"></circle>
+                                        </svg>
+                                    </div>
+                                    <p class="title">Profile</p>
+                                </div>
+                                <div class="button">
+                                    <div class="icon" (click)="showInfo('Esta funcionalidad esta en desarrollo')">
+                                        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"
+                                            stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                                            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                                        </svg>
+                                    </div>
+                                    <p class="title">Mute</p>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="details">
+                                <label class="dark-mode">
+                                    <span class="label">Dark Mode</span>
+                                    <input id="input-dark" class="input-dark" type="checkbox" />
+                                    <div class="toggle">
+                                        <div class="circle"></div>
+                                    </div>
+                                </label>
+                                <div class="theme">
+                                    <span class="label">Theme</span>
+                                    <div class="colors">
+                                        <div id="color-blue" class="color blue"></div>
+                                        <div id="color-red" class="color red"></div>
+                                        <div id="color-green" class="color green"></div>
+                                        <div id="color-purple" class="color purple"></div>
+                                    </div>
+                                </div>
+                                <div class="media">
+                                    <span class="label">
+                                        <svg stroke="currentColor" fill="none" stroke-width="0" viewBox="0 0 24 24"
+                                            height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                            </path>
+                                        </svg>
+                                        <span>Mis animalitos</span>
+                                    </span>
+                                    <div class="photos">
+                                        <img class="img" *ngFor="let animal of listAnimal"
+                                            [src]="animal.foto ? 'data:image/jpeg;base64,'+ animal.foto : '../../../../assets/img/i.svg'"
+                                            alt="" (click)="redirectToProfileAnimal(animal.id_animal)" />
+                                    </div>
+                                    <span class="view-more">View more</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <img class="f" src="../../../../assets/img/login/fon.jpeg" alt="" style="width: 100%; height: 100%;"
+                    *ngIf="visibleChat == false">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="50000"
+    rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+
+<p-toast></p-toast>
+

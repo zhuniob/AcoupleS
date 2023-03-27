@@ -1,0 +1,485 @@
+/***  GENERAL  ***/
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #C8D1BA;
+  margin: 0px;
+  /* Normalize*/
+  font-size: 1em;
+  font-family: "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+p a {
+  text-decoration: none;
+  color: black;
+}
+
+/***  HEADER  ***/
+
+.header {
+  background-image: url('https://thumbs.dreamstime.com/b/parte-posterior-del-perro-en-el-paisaje-de-la-naturaleza-del-fondo-56305869.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 400px;
+  width: 100%;
+  border-top: 17px solid #9dac85;
+  text-align: center;
+  padding-top: 190px;
+  box-shadow: 3px 3px 5px 6px #ccc;
+
+}
+
+.header2 {
+  background-image: url('https://previews.123rf.com/images/stockchairatgfx/stockchairatgfx1506/stockchairatgfx150600230/41966586-vector-de-fondo-tecnol%C3%B3gico-con-una-textura-de-placa-de-circuito.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 400px;
+  width: 100%;
+  border-top: 17px solid #9dac85;
+  text-align: center;
+  padding-top: 190px;
+  box-shadow: 3px 3px 5px 6px #ccc;
+
+}
+
+.header h3,
+h1 {
+  font-family: "Gentium Book Basic", Georgia, serif;
+  letter-spacing: 0.25em;
+
+}
+
+.header h1 {
+  font-size: 2.8rem;
+  text-shadow: 1px 1px 1px #000;
+}
+
+.header h3 {
+  font-size: 1.5rem;
+}
+
+
+/***  MIDCONTENT  ***/
+
+.midsection1,
+.midsection2,
+.midsection3 {
+  text-align: justify;
+  margin-bottom: 100px;
+}
+
+.midsection1 h3,
+.midsection2 h3,
+.midsection3 h3 {
+  margin-bottom: 40px;
+  letter-spacing: 0.3em;
+  text-shadow: 1px 1px 1px #000;
+}
+
+.midsection1 p,
+.midsection2 p,
+.midsection3 p {
+  margin-bottom: 40px;
+}
+
+.midsection3 p:last-child {
+  margin-top: 160px;
+}
+
+.midcontent {
+  padding: 20px 50px;
+
+  font-size: 1rem;
+  max-width: 100%;
+}
+
+.midcontent h3 {
+  font-size: 1.5rem;
+}
+
+.willk {
+  font-size: 1.3rem;
+}
+
+
+/***  FOOTER  ***/
+
+.footer {
+  background-color: #8e8288;
+  height: 180px;
+  text-align: center;
+  padding-top: 30px;
+  max-width: 100%;
+  margin: auto;
+  font-family: Verdana;
+  font-size: 0.9rem;
+  border-bottom: 17px solid #50122f;
+}
+
+.footer li {
+  display: inline;
+  margin-left: 100px;
+}
+
+.footer ul {
+  margin-top: 25px;
+  margin-bottom: 25px;
+  margin-right: 10%;
+}
+
+
+.footer a {
+  text-decoration: none;
+  color: #7b3757;
+  font-weight: 900;
+}
+
+.footer a:hover {
+  color: #50122f;
+}
+
+
+/***  MEDIA QUERIES  ***/
+
+@media (min-width: 1400px) {
+  .midcontent {
+
+    max-width: 70%;
+    margin: auto;
+  }
+}
+
+@media (max-width: 1024px) {
+  .midcontent {
+    max-width: 70%;
+    margin: auto;
+    padding: 5% 5%;
+  }
+
+  .footer {
+    padding-bottom: 20px;
+  }
+
+}
+
+@media (max-width: 768px) {
+  .midsection3 p:last-child {
+    text-align: left;
+  }
+
+  .midsection3 p:last-child {
+    margin-top: 90px;
+  }
+
+  .footer {
+    padding-bottom: 170px;
+    max-width: 100%;
+    margin: auto;
+  }
+
+  .footer ul {
+    max-width: 90%;
+    margin: auto;
+  }
+
+  .footer li {
+    margin: auto;
+  }
+
+}
+
+
+
+/* Implementacion de codigo de maeriela en ela cso para el 3d */
+
+
+#slideshow {
+  margin: 0 auto;
+  padding-top: 10px;
+  height: 350px;
+  width: 100%;
+
+  box-sizing: border-box;
+}
+
+.slideshow-title {
+  font-family: 'Allerta Stencil';
+  font-size: 62px;
+  color: #fff;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 25%;
+  letter-spacing: 3px;
+  font-weight: 300;
+}
+
+.sub-heading {
+  padding-top: 50px;
+  font-size: 18px;
+}
+
+.sub-heading-two {
+  font-size: 15px;
+}
+
+.sub-heading-three {
+  font-size: 13px;
+}
+
+.sub-heading-four {
+  font-size: 11px;
+}
+
+.sub-heading-five {
+  font-size: 9px;
+}
+
+.sub-heading-six {
+  font-size: 7px;
+}
+
+.sub-heading-seven {
+  font-size: 5px;
+}
+
+.sub-heading-eight {
+  font-size: 3px;
+}
+
+.sub-heading-nine {
+  font-size: 1px;
+}
+
+.entire-content {
+  margin: auto;
+  width: 190px;
+  perspective: 1000px;
+  position: relative;
+  padding-top: 80px;
+}
+
+.content-carrousel {
+  width: 100%;
+  position: absolute;
+  float: right;
+  animation: rotar 15s infinite linear;
+  transform-style: preserve-3d;
+}
+
+.content-carrousel:hover {
+  animation-play-state: paused;
+  cursor: pointer;
+}
+
+.content-carrousel figure {
+  width: 100%;
+  height: 120px;
+  border: 1px solid #3b444b;
+  overflow: hidden;
+  position: absolute;
+}
+
+.content-carrousel figure:nth-child(1) {
+  transform: rotateY(0deg) translateZ(300px);
+}
+
+.content-carrousel figure:nth-child(2) {
+  transform: rotateY(40deg) translateZ(300px);
+}
+
+.content-carrousel figure:nth-child(3) {
+  transform: rotateY(80deg) translateZ(300px);
+}
+
+.content-carrousel figure:nth-child(4) {
+  transform: rotateY(120deg) translateZ(300px);
+}
+
+.content-carrousel figure:nth-child(5) {
+  transform: rotateY(160deg) translateZ(300px);
+}
+
+.content-carrousel figure:nth-child(6) {
+  transform: rotateY(200deg) translateZ(300px);
+}
+
+.content-carrousel figure:nth-child(7) {
+  transform: rotateY(240deg) translateZ(300px);
+}
+
+.content-carrousel figure:nth-child(8) {
+  transform: rotateY(280deg) translateZ(300px);
+}
+
+.content-carrousel figure:nth-child(9) {
+  transform: rotateY(320deg) translateZ(300px);
+}
+
+.content-carrousel figure:nth-child(10) {
+  transform: rotateY(360deg) translateZ(300px);
+}
+
+.shadow {
+  position: absolute;
+  box-shadow: 0px 0px 20px 0px #000;
+  border-radius: 1px;
+}
+
+.content-carrousel img {
+  image-rendering: auto;
+  transition: all 300ms;
+  width: 100%;
+  height: 100%;
+}
+
+.content-carrousel img:hover {
+  transform: scale(1.2);
+  transition: all 300ms;
+}
+
+@keyframes rotar {
+  from {
+    transform: rotateY(0deg);
+  }
+
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+/* Nuevo codgo para el diseño de la carga */
+
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.cs-loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10000;
+}
+
+.cs-loader-inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  color: #FFF;
+  padding: 0 100px;
+  text-align: center;
+}
+
+
+.cs-loader-inner label {
+  font-size: 20px;
+  opacity: 0;
+  display: inline-block;
+}
+
+@keyframes lol {
+  0% {
+    opacity: 0;
+    transform: translateX(-300px);
+  }
+
+  33% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+
+  66% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(300px);
+  }
+}
+
+@-webkit-keyframes lol {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(-300px);
+  }
+
+  33% {
+    opacity: 1;
+    -webkit-transform: translateX(0px);
+  }
+
+  66% {
+    opacity: 1;
+    -webkit-transform: translateX(0px);
+  }
+
+  100% {
+    opacity: 0;
+    -webkit-transform: translateX(300px);
+  }
+}
+
+.cs-loader-inner label:nth-child(6) {
+  -webkit-animation: lol 3s infinite ease-in-out;
+  animation: lol 3s infinite ease-in-out;
+}
+
+.cs-loader-inner label:nth-child(5) {
+  -webkit-animation: lol 3s 100ms infinite ease-in-out;
+  animation: lol 3s 100ms infinite ease-in-out;
+}
+
+.cs-loader-inner label:nth-child(4) {
+  -webkit-animation: lol 3s 200ms infinite ease-in-out;
+  animation: lol 3s 200ms infinite ease-in-out;
+}
+
+.cs-loader-inner label:nth-child(3) {
+  -webkit-animation: lol 3s 300ms infinite ease-in-out;
+  animation: lol 3s 300ms infinite ease-in-out;
+}
+
+.cs-loader-inner label:nth-child(2) {
+  -webkit-animation: lol 3s 400ms infinite ease-in-out;
+  animation: lol 3s 400ms infinite ease-in-out;
+}
+
+.cs-loader-inner label:nth-child(1) {
+  -webkit-animation: lol 3s 500ms infinite ease-in-out;
+  animation: lol 3s 500ms infinite ease-in-out;
+}
+
+/* Disabled */
+/* #slideshow .entire-content {
+  display: block;
+}
+
+@media screen and (max-width: 600px) {
+  #slideshow .entire-content {
+    display: none;
+  }
+} */
+
+@media only screen and (max-width: 600px) {
+  section#slideshow {
+    display: none;
+  }
+}
+
+
+

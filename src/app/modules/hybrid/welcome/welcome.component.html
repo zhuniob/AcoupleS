@@ -1,0 +1,372 @@
+<div *ngIf="userRol === 'ADMIN'" class="interfaz-administrador">
+
+  <div class="overlay" *ngIf="isLoadingDataAdmin">
+    <div class="cs-loader">
+      <div class="cs-loader-inner">
+        <label>●</label>
+        <label>●</label>
+        <label>●</label>
+        <label>●</label>
+        <label>●</label>
+        <label>●</label>
+      </div>
+    </div>
+
+  </div>
+
+  <div *ngIf="!isLoadingDataAdmin">
+
+    <header>
+      <div class="header2">
+        <h3 class="hh4">BIENVENIDO A NUESTRO SISTEMA</h3>
+        <h1 class="hh1">Administrador</h1>
+      </div>
+    </header>
+    <div class="mt-3 ml-6 mx-6" style="letter-spacing: 0.3em;
+    text-shadow: 1px 1px 1px #000;">
+        <h3 style="font-family: 'Times New Roman', Times, serif;">Resumen de información</h3>
+      </div>
+
+
+    <div class="container mt-3">
+      <div class="grid">
+        <div class="col-12 md:col-6 lg:col-3">
+          <div class="surface-card shadow-2 p-3 border-round">
+            <div class="flex justify-content-between mb-3">
+              <div>
+                <span class="block text-500 font-medium mb-3">Usuarios</span>
+                <div class="text-900 font-medium text-xl">{{filterCountAdmin.num_user}} En el sistema.</div>
+              </div>
+              <div class="flex align-items-center justify-content-center bg-blue-100 border-round"
+                style="width:2.5rem;height:2.5rem">
+                <i class="pi pi-file-edit text-blue-500 text-xl"></i>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-12 md:col-6 lg:col-3">
+          <div class="surface-card shadow-2 p-3 border-round">
+            <div class="flex justify-content-between mb-3">
+              <div>
+                <span class="block text-500 font-medium mb-3">Tipos de animales</span>
+                <div class="text-900 font-medium text-xl">{{filterCountAdmin.num_tipo}} Tipos ingresadas.</div>
+              </div>
+              <div class="flex align-items-center justify-content-center bg-orange-100 border-round"
+                style="width:2.5rem;height:2.5rem">
+                <i class="pi pi-bars text-orange-500 text-xl"></i>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-12 md:col-6 lg:col-3">
+          <div class="surface-card shadow-2 p-3 border-round">
+            <div class="flex justify-content-between mb-3">
+              <div>
+                <span class="block text-500 font-medium mb-3">Razas de animales</span>
+                <div class="text-900 font-medium text-xl">{{filterCountAdmin.num_raza}} Razas ingresadas.</div>
+              </div>
+              <div class="flex align-items-center justify-content-center bg-cyan-100 border-round"
+                style="width:2.5rem;height:2.5rem">
+                <i class="pi pi-inbox text-cyan-500 text-xl"></i>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="col-12 md:col-6 lg:col-3">
+          <div class="surface-card shadow-2 p-3 border-round">
+            <div class="flex justify-content-between mb-3">
+              <div>
+                <span class="block text-500 font-medium mb-3">Animales</span>
+                <div class="text-900 font-medium text-xl">{{filterCountAdmin.num_animal}} En el sistema.</div>
+              </div>
+              <div class="flex align-items-center justify-content-center bg-green-100 border-round"
+                style="width:2.5rem;height:2.5rem">
+                <i class="pi pi-envelope text-green-500 text-xl"></i>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3D Slideshow Section -->
+    <section id="slideshow" *ngIf="showSlides">
+      <div class="entire-content">
+        <div class="content-carrousel">
+          <figure class="shadow"><img src="https://tse3.mm.bing.net/th?id=OIP.v8JCjh892gC-owD0SSRsDgHaEc&pid=Api&P=0" />
+          </figure>
+          <figure class="shadow"><img src="https://tse3.mm.bing.net/th?id=OIP.duyOQzIfBHuy1tL4KSA4eQHaD2&pid=Api&P=0" />
+          </figure>
+          <figure class="shadow"><img src="https://tse4.mm.bing.net/th?id=OIP.ukaZzNHxahKce8SMapxh_gHaEc&pid=Api&P=0" />
+          </figure>
+          <figure class="shadow"><img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgyrvN1B23hRVJjnXDSRRalFp9_7NNLnlMcw&usqp=CAU" />
+          </figure>
+          <figure class="shadow"><img src="https://tse3.mm.bing.net/th?id=OIP.xSEtKyUBhYsIdd-Qb9a2KQHaE8&pid=Api&P=0" />
+          </figure>
+          <figure class="shadow"><img
+              src="data:image/jpeg;base64,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" />
+          </figure>
+          <figure class="shadow"><img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRQLQbsc4JDJMEaZ_Wp1oUSHd1uz2kXmWHfQ&usqp=CAU" />
+          </figure>
+          <figure class="shadow"><img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQP12Llkfwa9eqXxkJwG6Kz-cPWyho-aYbqg&usqp=CAU" />
+          </figure>
+          <figure class="shadow"><img
+              src="data:image/png;base64,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" />
+          </figure>
+        </div>
+      </div>
+    </section>
+    <div class="midcontent">
+      <section class="midsection1">
+        <h2 align="center" style="font-family: 'Times New Roman', Times, serif;"> <B>Es importante que un administrador
+            gestione el
+            sistema por su:</B></h2>
+        <br>
+        <ul>
+          <h5 style="font-family: Georgia, 'Times New Roman', Times, serif;">✔ Seguridad: El administrador es
+            responsable
+            de proteger la información confidencial de la empresa y sus
+            clientes.
+            Una gestión adecuada de la cuenta, incluyendo la creación de contraseñas seguras y la configuración de
+            medidas
+            de
+            seguridad adicionales, puede prevenir el acceso no autorizado a la cuenta y evitar robos de datos.</h5>
+          <h5 style="font-family: Georgia, 'Times New Roman', Times, serif;">✔ Control de acceso: El administrador tiene
+            el control de quién tiene acceso a la cuenta y a qué información. Al
+            gestionar adecuadamente la cuenta, el administrador puede garantizar que sólo las personas autorizadas
+            tengan
+            acceso a la información de la empresa.</h5>
+          <h5 style="font-family: Georgia, 'Times New Roman', Times, serif;">✔ Seguimiento: Un administrador que
+            gestiona
+            su cuenta puede realizar un seguimiento de las actividades de los
+            usuarios de la cuenta y detectar cualquier actividad sospechosa o inusual. Esto puede ayudar a prevenir el
+            fraude
+            y garantizar que la cuenta se esté utilizando adecuadamente.</h5>
+          <h5 style="font-family: Georgia, 'Times New Roman', Times, serif;">✔ Mantenimiento: Al gestionar su cuenta, el
+            administrador puede asegurarse de que la información de la empresa
+            esté actualizada y que la cuenta se esté utilizando de la manera más eficiente posible. Esto puede incluir
+            la
+            eliminación de usuarios innecesarios y la actualización de la información de contacto.</h5>
+
+        </ul>
+        <br>
+        <br>
+        <h5 style="font-family: Georgia, 'Times New Roman', Times, serif;">
+          Es un placer tenerte aquí. Como administrador, tu trabajo es crucial para asegurar el éxito de la
+          organización
+          o
+          empresa que lideras. Confiamos en que utilizarás tus habilidades y experiencia para tomar decisiones
+          acertadas
+          y
+          llevar a tu equipo a alcanzar sus objetivos de manera eficiente y efectiva. ¡Gracias por tu dedicación y
+          liderazgo!
+        </h5>
+        <br>
+        <h5 style="font-family: Georgia, 'Times New Roman', Times, serif;">Tu trabajo implica una gran responsabilidad
+          en la gestión de recursos, la toma de decisiones y el liderazgo
+          de
+          un equipo. Es tu papel asegurarte de que se cumplan los objetivos y las metas de la organización, así como
+          de
+          mantener una cultura empresarial positiva y productiva.
+
+          Para ser un buen administrador, necesitas tener habilidades como la capacidad de liderazgo, la comunicación
+          efectiva, la toma de decisiones estratégicas, la resolución de problemas, el pensamiento crítico y la
+          capacidad
+          de motivar a tu equipo.</h5>
+
+        <!-- <section class="midsection3"> -->
+
+        <br>
+        <h2 style="font-family: Georgia, 'Times New Roman', Times, serif;">Mas información</h2>
+        <br>
+        <h5 style="font-family: Georgia, 'Times New Roman', Times, serif;">Recomendamos utilizar este sistema con
+          responsabilidad y un buen uso con el fin de que la experiencia de
+          los
+          usuarios sea única y agradable</h5>
+
+        <p align="center" class="mt-3" style="font-family: 'Times New Roman', Times, serif;"><b class="willk">Disfruta
+            tu
+            estancia!</b> </p>
+
+      </section>
+    </div>
+
+  </div>
+
+
+</div>
+
+
+<div *ngIf="userRol === 'USUARIO'" class="interfaz-usuario">
+
+  <div class="overlay" *ngIf="isLoadingDataUser">
+    <div class="cs-loader">
+      <div class="cs-loader-inner">
+        <label>●</label>
+        <label>●</label>
+        <label>●</label>
+        <label>●</label>
+        <label>●</label>
+        <label>●</label>
+      </div>
+    </div>
+
+  </div>
+
+  <div *ngIf="!isLoadingDataUser">
+    <header>
+      <div class="header">
+        <h3 class="hh4">BIENVENIDO A ANIMALSCOUPLE</h3>
+        <h1 class="hh1">¡Disfruta tu estancia en la web!</h1>
+      </div>
+    </header>
+
+    <div class="mt-3 ml-6 mx-6" style="letter-spacing: 0.3em;
+  text-shadow: 1px 1px 1px #000;">
+      <h3 style="font-family: 'Times New Roman', Times, serif;">Resumen de información</h3>
+    </div>
+    <div class="container mt-3">
+      <div class="grid">
+        <div class="col-12 md:col-6 lg:col-3">
+          <div class="surface-card shadow-2 p-3 border-round">
+            <div class="flex justify-content-between mb-3">
+              <div>
+                <span class="block text-500 font-medium mb-3">Mis Animales</span>
+                <div class="text-900 font-medium text-xl">{{filters.misAnimalesCount}} Disponible/s</div>
+              </div>
+              <div class="flex align-items-center justify-content-center bg-blue-100 border-round"
+                style="width:2.5rem;height:2.5rem">
+                <i class="pi pi-file-edit text-blue-500 text-xl"></i>
+              </div>
+            </div>
+            <span class="text-green-500 font-medium">{{filters.misAnimalesCountLend}} </span>
+            <span class="text-500">Animale/s prestados</span>
+          </div>
+        </div>
+        <div class="col-12 md:col-6 lg:col-3">
+          <div class="surface-card shadow-2 p-3 border-round">
+            <div class="flex justify-content-between mb-3">
+              <div>
+                <span class="block text-500 font-medium mb-3">Tipos de animales</span>
+                <div class="text-900 font-medium text-xl">{{filters.tiposAnimales}} Tipos</div>
+              </div>
+              <div class="flex align-items-center justify-content-center bg-orange-100 border-round"
+                style="width:2.5rem;height:2.5rem">
+                <i class="pi pi-bars text-orange-500 text-xl"></i>
+              </div>
+            </div>
+            <span class="text-500">Contamos con </span>
+            <span class="text-green-500 font-medium">{{filters.tiposAnimales}} </span>
+            <span class="text-500">tipos.</span>
+          </div>
+        </div>
+        <div class="col-12 md:col-6 lg:col-3">
+          <div class="surface-card shadow-2 p-3 border-round">
+            <div class="flex justify-content-between mb-3">
+              <div>
+                <span class="block text-500 font-medium mb-3">Razas de animales</span>
+                <div class="text-900 font-medium text-xl">{{filters.razaAnimales}} Razas</div>
+              </div>
+              <div class="flex align-items-center justify-content-center bg-cyan-100 border-round"
+                style="width:2.5rem;height:2.5rem">
+                <i class="pi pi-inbox text-cyan-500 text-xl"></i>
+              </div>
+            </div>
+            <span class="text-500">Contamos con </span>
+            <span class="text-green-500 font-medium">{{filters.razaAnimales}} </span>
+            <span class="text-500">razas.</span>
+          </div>
+        </div>
+        <div class="col-12 md:col-6 lg:col-3">
+          <div class="surface-card shadow-2 p-3 border-round">
+            <div class="flex justify-content-between mb-3">
+              <div>
+                <span class="block text-500 font-medium mb-3">Galeria de Animales</span>
+                <div class="text-900 font-medium text-xl">{{filters.allAnimalsDisponible}} Disponibles</div>
+              </div>
+              <div class="flex align-items-center justify-content-center bg-purple-100 border-round"
+                style="width:2.5rem;height:2.5rem">
+                <i class="pi pi-images text-purple-500 text-xl"></i>
+              </div>
+            </div>
+            <span class="text-green-500 font-medium">{{filters.allAnimalsOcupados}} </span>
+            <span class="text-500"> Animal/es ocupado/s</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 3D Slideshow Section -->
+    <section id="slideshow" *ngIf="showSlides">
+      <div class="entire-content">
+        <div class="content-carrousel">
+          <figure class="shadow"><img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbdMAFmNRwaFa2FVHj6abwOYZAwDSuIiaMZw&usqp=CAU" />
+          </figure>
+          <figure class="shadow"><img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHrmVy6HUz1XQ4sUnIxaIvEG1aq2NbSLGf-w&usqp=CAU" />
+          </figure>
+          <figure class="shadow"><img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN0qnEkcpm7sWPzuECDUFq7wgWE--WCZn8Fg&usqp=CAU" />
+          </figure>
+          <figure class="shadow"><img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4dFrRnj7xXK5MGOrtJpjSA7Rya8anZktS_Q&usqp=CAU" />
+          </figure>
+          <figure class="shadow"><img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_6SiYK4Xs5hewdd6ZQmWlHQ_xoygxIthj8g&usqp=CAU" />
+          </figure>
+          <figure class="shadow"><img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOPS0NnVa2bpZciL78gdAmFY8RSfJ3Hk_dAg&usqp=CAU" />
+          </figure>
+          <figure class="shadow"><img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxdbBWxGusmdLsjv4SW_0t68bwCaK2OkQBwUF_1xW_LpM-Ku7kYPyJpTKYjodouw9YxKc&usqp=CAU" />
+          </figure>
+          <figure class="shadow"><img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGEuaVHd2tqiCgphwvW2nulswnckAQl7F8AQ&usqp=CAU" />
+          </figure>
+          <figure class="shadow"><img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9_-_eH5TbvDQ0utbsfpul7KA2mK382AKLnQ&usqp=CAU" />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <div class="midcontent">
+
+      <section class="midsection1">
+        <h2 style="font-family: 'Times New Roman', Times, serif;">Nuestra misión</h2>
+        <br>
+        <h5 style="font-family: Georgia, 'Times New Roman', Times, serif;">Estamos comprometidos con la excelencia y
+          la satisfacción del cliente, y nuestras pruebas son una parte
+          fundamental de este compromiso.</h5>
+        <br>
+        <h5 style="font-family: Georgia, 'Times New Roman', Times, serif;">Como desarrolladores de software,
+          encargados de este proyecto, tenemos la responsabilidad de ofrecer un
+          programa que satisfaga los requerimientos de los clientes, así como los estándares de desarrollo correcto
+          para
+          un buen funcionamiento del sistema para ustedes.</h5>
+        <br>
+
+        <h2 style="font-family: 'Times New Roman', Times, serif;">Más información</h2>
+        <br>
+        <h5 style="font-family: Georgia, 'Times New Roman', Times, serif;">Este sistema es una herramienta esencial
+          para garantizar la satisfacción del cliente y el éxito en la
+          implementación del software.</h5>
+        <br>
+        <br>
+        <br>
+        <h1 align="center" style="font-family: 'Times New Roman', Times, serif;"><b class="willk">¡DISFRUTA!</b> </h1>
+      </section>
+    </div>
+
+  </div>
+</div>
